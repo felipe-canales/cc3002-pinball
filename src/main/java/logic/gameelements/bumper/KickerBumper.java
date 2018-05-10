@@ -8,6 +8,8 @@ public class KickerBumper extends AbstractBumper {
 
     @Override
     public int hit() {
-        return 0;
+        int score = getScore() * (isUpgraded()? 2: 1);
+        decreaseHitsToUpgrade();
+        return score;
     }
 }

@@ -7,6 +7,8 @@ public class PopBumper extends AbstractBumper {
 
     @Override
     public int hit() {
-        return 0;
+        int score = getScore() * (isUpgraded()? 3: 1);
+        decreaseHitsToUpgrade();
+        return score;
     }
 }

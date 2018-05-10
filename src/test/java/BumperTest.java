@@ -22,8 +22,8 @@ public class BumperTest {
 
     @Test
     public void normalScore() {
-        assertEquals("PopBumper's score is incorrect", 100, pop.getScore());
-        assertEquals("KickerBumper's score is incorrect", 500, kick.getScore());
+        assertEquals("PopBumper's score is incorrect", 100, pop.hit());
+        assertEquals("KickerBumper's score is incorrect", 500, kick.hit());
     }
 
     @Test
@@ -56,7 +56,17 @@ public class BumperTest {
             pop.hit();
         for (int i = 0; i < 5; i++)
             kick.hit();
-        assertEquals("PopBumper's upgraded score is incorrect", 300, pop.getScore());
-        assertEquals("KickerBumper's upgraded score is incorrect",1000, kick.getScore());
+        assertEquals("PopBumper's upgraded score is incorrect", 300, pop.hit());
+        assertEquals("KickerBumper's upgraded score is incorrect",1000, kick.hit());
+    }
+
+    @Test
+    public void remainingHitsBelowZero () {
+        for (int i = 0; i < 4; i++)
+            pop.hit();
+        for (int i = 0; i < 6; i++)
+            kick.hit();
+        assertEquals("PopBumper's remaining hits can't be negative", 0, pop.remainingHitsToUpgrade());
+        assertEquals("KickerBumper's remaining hits can't be negative", 0, kick.remainingHitsToUpgrade());
     }
 }

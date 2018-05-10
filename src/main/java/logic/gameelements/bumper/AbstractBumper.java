@@ -14,6 +14,14 @@ public abstract class AbstractBumper implements Bumper {
         this.score = score;
     }
 
+    public void decreaseHitsToUpgrade() {
+        if (isUpgraded())
+            return;
+        hitsToUpgrade--;
+        if (remainingHitsToUpgrade() == 0)
+            upgrade();
+    }
+
     @Override
     public int getScore() {
         return score;
