@@ -39,6 +39,7 @@ public abstract class AbstractBumper implements Bumper {
 
     @Override
     public void upgrade() {
+        hitsToUpgrade = 0;
         upgraded = true;
     }
 

@@ -22,6 +22,10 @@ public abstract class AbstractTarget implements Target {
 
     @Override
     public void reset() {
-        this.active = true;
+        active = true;
+    }
+
+    protected void deactivate() {
+        active = false;
     }
 }

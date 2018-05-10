@@ -7,6 +7,9 @@ public class DropTarget extends AbstractTarget {
 
     @Override
     public int hit() {
-        return 0;
+        if (!isActive())
+            return 0;
+        deactivate();
+        return getScore();
     }
 }

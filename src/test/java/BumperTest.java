@@ -9,13 +9,13 @@ public class BumperTest {
     static private KickerBumper kick;
 
     @BeforeClass
-    public static void init() {
+    public static void setUp() {
         pop = new PopBumper();
         kick = new KickerBumper();
     }
 
     @Before
-    public void setUp() {
+    public void reset() {
         pop.downgrade();
         kick.downgrade();
     }
