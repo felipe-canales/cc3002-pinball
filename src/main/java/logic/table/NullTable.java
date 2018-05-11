@@ -3,13 +3,14 @@ package logic.table;
 import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NullTable implements Table{
 
     @Override
     public String getTableName() {
-        return null;
+        return "Null Table";
     }
 
     @Override
@@ -24,12 +25,12 @@ public class NullTable implements Table{
 
     @Override
     public List<Bumper> getBumpers() {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
     public List<Target> getTargets() {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
