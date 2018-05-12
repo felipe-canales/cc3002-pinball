@@ -20,7 +20,7 @@ public class TableTest {
 
     @Before
     public void reset() {
-        rng.changeSeed(0);
+        rng.setSeed(0);
         n = new NullTable();
         p = new PlayableTable("test", 10, 0.5, 3, 2, rng);
     }

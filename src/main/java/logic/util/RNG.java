@@ -9,11 +9,7 @@ public class RNG {
         r = new Random();
     }
 
-    public RNG(int seed) {
-        r = new Random(seed);
-    }
-
-    public void changeSeed(int newSeed) {
+    public void setSeed(int newSeed) {
         r = new Random(newSeed);
     }
 
