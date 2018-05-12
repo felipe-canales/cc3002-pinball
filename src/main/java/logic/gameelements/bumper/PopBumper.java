@@ -1,15 +1,14 @@
 package logic.gameelements.bumper;
 
+import java.util.Random;
+
 public class PopBumper extends AbstractBumper {
-    public PopBumper() {
-        super(3, 100);
+    public PopBumper(Random rng) {
+        super(3, 100, rng);
     }
 
-    @Override
-    public int hit() {
-        int score = getScore();
-        decreaseHitsToUpgrade();
-        return score;
+    public PopBumper() {
+        this(new Random());
     }
 
     @Override

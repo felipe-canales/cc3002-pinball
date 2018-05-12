@@ -1,5 +1,6 @@
 package logic.table;
 
+import controller.BonusTriggerer;
 import logic.gameelements.bumper.Bumper;
 import logic.gameelements.bumper.KickerBumper;
 import logic.gameelements.bumper.PopBumper;
@@ -25,15 +26,15 @@ public class PlayableTable implements Table {
 
         for (int i = 0; i < numberOfBumpers; i++) {
             if (rng.nextDouble() < prob)
-                bumpers.add(new PopBumper());
+                bumpers.add(new PopBumper(rng));
             else
-                bumpers.add(new KickerBumper());
+                bumpers.add(new KickerBumper(rng));
         }
         for (int i = 0; i < numberOfTargets; i++) {
             targets.add(new SpotTarget());
         }
         for (int i = 0; i < numberOfDropTargets; i++) {
-            targets.add(new DropTarget());
+            targets.add(new DropTarget(rng));
         }
     }
 
@@ -88,5 +89,11 @@ public class PlayableTable implements Table {
     @Override
     public boolean isPlayableTable() {
         return true;
+    }
+
+    @Override
+    public void acceptTriggerer(BonusTriggerer bonusTriggerer) {
+        if (getNumberOfDropTargets() == getCurrentlyDroppedDropTargets())
+            bonusTriggerer.triggerDropTargetBonus();
     }
 }

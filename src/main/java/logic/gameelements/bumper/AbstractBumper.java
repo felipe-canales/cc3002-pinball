@@ -1,27 +1,45 @@
 package logic.gameelements.bumper;
 
+import controller.BonusTriggerer;
+
 import java.util.Observable;
+import java.util.Random;
 
 public abstract class AbstractBumper extends Observable implements Bumper {
 
     private boolean upgraded;
+    private boolean triggerBonus;
+    private Random rng;
     private int maxHits;
     private int hitsToUpgrade;
     private int score;
 
-    public AbstractBumper(int hits, int score) {
+    public AbstractBumper(int hits, int score, Random rng) {
         this.upgraded = false;
+        this.triggerBonus = false;
+        this.rng = rng;
         this.maxHits = hits;
         this.hitsToUpgrade = hits;
         this.score = score;
     }
 
-    protected void decreaseHitsToUpgrade() {
+    private void decreaseHitsToUpgrade() {
         if (isUpgraded())
             return;
         hitsToUpgrade--;
         if (remainingHitsToUpgrade() == 0)
             upgrade();
+            if (rng.nextDouble() < 0.1)
+                triggerBonus = true;
+    }
+
+    @Override
+    public int hit() {
+        int score = getScore();
+        decreaseHitsToUpgrade();
+        setChanged();
+        notifyObservers();
+        return score;
     }
 
     @Override
@@ -49,5 +67,12 @@ public abstract class AbstractBumper extends Observable implements Bumper {
     public void downgrade() {
         upgraded = false;
         hitsToUpgrade = maxHits;
+    }
+
+    public void acceptTriggerer(BonusTriggerer bonusTriggerer) {
+        if (triggerBonus) {
+            bonusTriggerer.triggerExtraBallBonus();
+            triggerBonus = false;
+        }
     }
 }

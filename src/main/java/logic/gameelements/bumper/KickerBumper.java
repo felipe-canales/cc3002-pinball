@@ -1,15 +1,14 @@
 package logic.gameelements.bumper;
 
+import java.util.Random;
+
 public class KickerBumper extends AbstractBumper {
-    public KickerBumper() {
-        super(5, 500);
+    public KickerBumper(Random rng) {
+        super(5, 500, rng);
     }
 
-    @Override
-    public int hit() {
-        int score = getScore();
-        decreaseHitsToUpgrade();
-        return score;
+    public KickerBumper() {
+        this(new Random());
     }
 
     @Override

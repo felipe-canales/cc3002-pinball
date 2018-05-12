@@ -13,6 +13,16 @@ public abstract class AbstractTarget extends Observable implements Target {
     }
 
     @Override
+    public int hit() {
+        if (!isActive())
+            return 0;
+        deactivate();
+        setChanged();
+        notifyObservers();
+        return getScore();
+    }
+
+    @Override
     public int getScore() {
         return score;
     }

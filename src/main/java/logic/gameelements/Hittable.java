@@ -1,5 +1,7 @@
 package logic.gameelements;
 
+import controller.BonusTriggerer;
+
 /**
  * Interface that represents a hittable object.
  *
@@ -24,4 +26,11 @@ public interface Hittable {
      * @return the current score of the object when hit
      */
     int getScore();
+
+    /**
+     * Receives a {@link BonusTriggerer} and, if appropiate, triggers a {@link logic.bonus.Bonus}.
+     *
+     * @param bonusTriggerer Instance of {@link BonusTriggerer}
+     */
+    void acceptTriggerer(BonusTriggerer bonusTriggerer);
 }

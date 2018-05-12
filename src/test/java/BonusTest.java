@@ -61,7 +61,7 @@ public class BonusTest {
         PlayableTable t = new PlayableTable("test", 10,0.5, 0,0);
         game.setTable(t);
         game.getDropTargetBonus().trigger(game);
-        for(Bumper b : t.getBumpers()) {
+        for (Bumper b : t.getBumpers()) {
             assertTrue(b.isUpgraded());
         }
     }

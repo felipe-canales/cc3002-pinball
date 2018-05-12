@@ -1,5 +1,6 @@
 package logic.table;
 
+import controller.BonusTriggerer;
 import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
 
@@ -62,4 +63,11 @@ public interface Table {
      * @return true if the table is playable, false otherwise
      */
     boolean isPlayableTable();
+
+    /**
+     * Receives a {@link BonusTriggerer} and, if appropiate, triggers the {@link logic.bonus.DropTargetBonus}
+     *
+     * @param bonusTriggerer Instance of {@link BonusTriggerer}
+     */
+    void acceptTriggerer(BonusTriggerer bonusTriggerer);
 }

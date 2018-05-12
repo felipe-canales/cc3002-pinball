@@ -1,5 +1,6 @@
 package logic.table;
 
+import controller.BonusTriggerer;
 import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
 
@@ -46,5 +47,10 @@ public class NullTable implements Table{
     @Override
     public boolean isPlayableTable() {
         return false;
+    }
+
+    @Override
+    public void acceptTriggerer(BonusTriggerer bonusTriggerer) {
+
     }
 }
