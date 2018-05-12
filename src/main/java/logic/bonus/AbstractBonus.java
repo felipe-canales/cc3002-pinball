@@ -12,4 +12,8 @@ public abstract class AbstractBonus implements Bonus {
     public int timesTriggered() {
         return triggered;
     }
+
+    protected void wasTriggered() {
+        triggered++;
+    }
 }

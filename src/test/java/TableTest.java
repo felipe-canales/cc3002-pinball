@@ -3,26 +3,16 @@ import logic.table.NullTable;
 import logic.table.PlayableTable;
 import org.junit.*;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import static org.junit.Assert.*;
 
 public class TableTest {
     private NullTable n;
     private PlayableTable p;
-    private static Random rng;
-
-    @BeforeClass
-    public static void setUp() {
-        rng = new Random();
-    }
 
     @Before
     public void reset() {
-        rng.setSeed(0);
         n = new NullTable();
-        p = new PlayableTable("test", 10, 0.5, 3, 2, rng);
+        p = new PlayableTable("test", 10, 0.5, 3, 2);
     }
 
     @Test
@@ -86,8 +76,7 @@ public class TableTest {
     public void upgradingBumpers() {
         n.upgradeAllBumpers();
         p.upgradeAllBumpers();
-        ArrayList<Bumper> bumpers = (ArrayList<Bumper>) p.getBumpers();
-        for (Bumper b : bumpers) {
+        for (Bumper b : p.getBumpers()) {
             assertTrue(b.isUpgraded());
         }
     }
