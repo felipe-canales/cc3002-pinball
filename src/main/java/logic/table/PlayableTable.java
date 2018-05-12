@@ -6,7 +6,7 @@ import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;
 import logic.gameelements.target.Target;
-import logic.util.RNG;
+import logic.rng.RNG;
 
 import java.util.ArrayList;
 import java.util.List;

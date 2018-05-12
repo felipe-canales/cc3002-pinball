@@ -22,6 +22,13 @@ public class HomeworkTwoFacade {
     private Game game;
 
     /**
+     * Constructor
+     */
+    public HomeworkTwoFacade() {
+
+    }
+
+    /**
      * Gets whether the current table is playable or not.
      *
      * @return true if the current table is playable, false otherwise
