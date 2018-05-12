@@ -65,4 +65,8 @@ public class Game implements Observer {
     public int getScore() {
         return score;
     }
+
+    public void addScore(int scoreObtained) {
+        score += scoreObtained;
+    }
 }

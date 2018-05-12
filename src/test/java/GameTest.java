@@ -56,4 +56,10 @@ public class GameTest {
     public void gettingScore() {
         assertEquals(0, game.getScore());
     }
+
+    @Test
+    public void addingScore() {
+        game.addScore(100);
+        assertEquals(100, game.getScore());
+    }
 }
