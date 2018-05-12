@@ -25,7 +25,7 @@ public class HomeworkTwoFacade {
      * Constructor
      */
     public HomeworkTwoFacade() {
-
+        game = new Game();
     }
 
     /**

@@ -1,6 +1,8 @@
 package logic.gameelements.target;
 
-public abstract class AbstractTarget implements Target {
+import java.util.Observable;
+
+public abstract class AbstractTarget extends Observable implements Target {
 
     private boolean active;
     private int score;
