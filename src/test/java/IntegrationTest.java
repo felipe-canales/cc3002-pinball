@@ -25,7 +25,7 @@ public class IntegrationTest {
         int currentScore = 0;
         for(Bumper b : game.getTable().getBumpers()) {
             currentScore += b.hit();
-            assertEquals(currentScore, b.getScore());
+            assertEquals(currentScore, game.getScore());
         }
     }
 
