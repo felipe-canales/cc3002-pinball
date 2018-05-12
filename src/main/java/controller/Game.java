@@ -69,4 +69,16 @@ public class Game implements Observer {
     public void addScore(int scoreObtained) {
         score += scoreObtained;
     }
+
+    public ExtraBallBonus getExtraBallBonus() {
+        return extraBall;
+    }
+
+    public JackPotBonus getJackPotBonus() {
+        return jackPot;
+    }
+
+    public DropTargetBonus getDropTargetBonus() {
+        return dropBonus;
+    }
 }

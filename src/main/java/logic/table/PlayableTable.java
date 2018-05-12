@@ -6,10 +6,10 @@ import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;
 import logic.gameelements.target.Target;
-import logic.rng.RNG;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class PlayableTable implements Table {
     private String name;
@@ -17,14 +17,14 @@ public class PlayableTable implements Table {
     private ArrayList<Target> targets;
     private int dropTargetIndex;
 
-    public PlayableTable(String name, int numberOfBumpers, double prob, int numberOfTargets, int numberOfDropTargets, RNG rng) {
+    public PlayableTable(String name, int numberOfBumpers, double prob, int numberOfTargets, int numberOfDropTargets, Random rng) {
         this.name = name;
         this.dropTargetIndex = numberOfTargets;
         bumpers = new ArrayList<>();
         targets = new ArrayList<>();
 
         for (int i = 0; i < numberOfBumpers; i++) {
-            if (rng.probability() < prob)
+            if (rng.nextDouble() < prob)
                 bumpers.add(new PopBumper());
             else
                 bumpers.add(new KickerBumper());
@@ -35,6 +35,10 @@ public class PlayableTable implements Table {
         for (int i = 0; i < numberOfDropTargets; i++) {
             targets.add(new DropTarget());
         }
+    }
+
+    public PlayableTable(String name, int numberOfBumpers, double prob, int numberOfTargets, int numberOfDropTargets) {
+        this(name, numberOfBumpers, prob, numberOfTargets, numberOfDropTargets, new Random());
     }
 
     @Override

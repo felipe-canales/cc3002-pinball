@@ -1,6 +1,4 @@
 import controller.Game;
-import logic.rng.RNG;
-import logic.table.NullTable;
 import logic.table.PlayableTable;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -10,9 +8,9 @@ public class GameTest {
     private PlayableTable table;
 
     @Before
-    public void reset() {
+    public void setUp() {
         game = new Game();
-        table = new PlayableTable("test table", 10, 0.5, 3, 2, new RNG());
+        table = new PlayableTable("test table", 10, 0.5, 3, 2);
         game.setTable(table);
     }
 

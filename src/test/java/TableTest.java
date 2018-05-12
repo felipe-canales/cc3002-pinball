@@ -1,21 +1,21 @@
 import logic.gameelements.bumper.Bumper;
 import logic.table.NullTable;
 import logic.table.PlayableTable;
-import logic.rng.RNG;
 import org.junit.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
 public class TableTest {
     private NullTable n;
     private PlayableTable p;
-    private static RNG rng;
+    private static Random rng;
 
     @BeforeClass
     public static void setUp() {
-        rng = new RNG();
+        rng = new Random();
     }
 
     @Before
