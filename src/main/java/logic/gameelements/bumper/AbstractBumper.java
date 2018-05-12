@@ -3,6 +3,7 @@ package logic.gameelements.bumper;
 import controller.BonusTriggerer;
 
 import java.util.Observable;
+import java.util.Observer;
 import java.util.Random;
 
 public abstract class AbstractBumper extends Observable implements Bumper {
@@ -35,11 +36,10 @@ public abstract class AbstractBumper extends Observable implements Bumper {
 
     @Override
     public int hit() {
-        int score = getScore();
         decreaseHitsToUpgrade();
         setChanged();
         notifyObservers();
-        return score;
+        return getScore();
     }
 
     @Override
@@ -49,7 +49,7 @@ public abstract class AbstractBumper extends Observable implements Bumper {
 
     @Override
     public int remainingHitsToUpgrade() {
-        return hitsToUpgrade;
+        return hitsToUpgrade == 0? hitsToUpgrade : hitsToUpgrade - 1;
     }
 
     @Override
@@ -69,10 +69,16 @@ public abstract class AbstractBumper extends Observable implements Bumper {
         hitsToUpgrade = maxHits;
     }
 
+    @Override
     public void acceptTriggerer(BonusTriggerer bonusTriggerer) {
         if (triggerBonus) {
             bonusTriggerer.triggerExtraBallBonus();
             triggerBonus = false;
         }
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+        super.addObserver(o);
     }
 }

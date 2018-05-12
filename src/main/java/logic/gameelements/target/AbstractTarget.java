@@ -1,6 +1,7 @@
 package logic.gameelements.target;
 
 import java.util.Observable;
+import java.util.Observer;
 
 public abstract class AbstractTarget extends Observable implements Target {
 
@@ -35,6 +36,11 @@ public abstract class AbstractTarget extends Observable implements Target {
     @Override
     public void reset() {
         active = true;
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+        super.addObserver(o);
     }
 
     protected void deactivate() {

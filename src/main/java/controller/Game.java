@@ -3,6 +3,9 @@ package controller;
 import logic.bonus.DropTargetBonus;
 import logic.bonus.ExtraBallBonus;
 import logic.bonus.JackPotBonus;
+import logic.gameelements.Hittable;
+import logic.gameelements.bumper.Bumper;
+import logic.gameelements.target.Target;
 import logic.table.NullTable;
 import logic.table.Table;
 
@@ -32,12 +35,19 @@ public class Game implements Observer {
     }
 
     private void setObservables() {
-
+        for (Bumper b : table.getBumpers()) {
+            b.addObserver(this);
+        }
+        for (Target t : table.getTargets()) {
+            t.addObserver(this);
+        }
     }
 
     @Override
     public void update(Observable o, Object arg) {
-
+        Hittable hittable = (Hittable)o;
+        addScore(hittable.getScore());
+        hittable.acceptTriggerer(new BonusTriggerer(this));
     }
 
     public void setTable(Table newTable) {

@@ -2,6 +2,8 @@ package logic.gameelements;
 
 import controller.BonusTriggerer;
 
+import java.util.Observer;
+
 /**
  * Interface that represents a hittable object.
  *
@@ -33,4 +35,11 @@ public interface Hittable {
      * @param bonusTriggerer Instance of {@link BonusTriggerer}
      */
     void acceptTriggerer(BonusTriggerer bonusTriggerer);
+
+    /**
+     * Adds an {@link java.util.Observer} as a listener of this hittable.
+     *
+     * @param o
+     */
+    void addObserver(Observer o);
 }
