@@ -1,7 +1,7 @@
 import logic.gameelements.bumper.Bumper;
 import logic.table.NullTable;
 import logic.table.PlayableTable;
-import logic.util.RNG;
+import logic.rng.RNG;
 import org.junit.*;
 
 import java.util.ArrayList;
