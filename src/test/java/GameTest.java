@@ -19,7 +19,7 @@ public class GameTest {
     @Test
     public void defaultTableIsNullTable() {
         Game g =  new Game();
-        assertEquals(new NullTable(), g.getTable());
+        assertFalse(g.getTable().isPlayableTable());
     }
 
     @Test
@@ -37,6 +37,14 @@ public class GameTest {
     public void droppingBalls() {
         game.dropBall();
         assertEquals(2, game.getNumberOfBalls());
+    }
+
+    @Test
+    public void havingNegativeBalls() {
+        for(int i = 0; i <= 5; i++) {
+            game.dropBall();
+        }
+        assertEquals(0, game.getNumberOfBalls());
     }
 
     @Test
