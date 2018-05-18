@@ -41,7 +41,7 @@ public class FacadeTest {
 
     @Test
     public void tableName() {
-        assertEquals("Null Table", facade.getTableName());
+        assertEquals("", facade.getTableName());
     }
 
     @Test
