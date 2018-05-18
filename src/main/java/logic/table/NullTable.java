@@ -11,7 +11,7 @@ public class NullTable implements Table{
 
     @Override
     public String getTableName() {
-        return "Null Table";
+        return "";
     }
 
     @Override

@@ -49,7 +49,7 @@ public abstract class AbstractBumper extends Observable implements Bumper {
 
     @Override
     public int remainingHitsToUpgrade() {
-        return hitsToUpgrade == 0? hitsToUpgrade : hitsToUpgrade - 1;
+        return hitsToUpgrade;
     }
 
     @Override

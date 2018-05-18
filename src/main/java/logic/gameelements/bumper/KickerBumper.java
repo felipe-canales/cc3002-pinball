@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class KickerBumper extends AbstractBumper {
     public KickerBumper(Random rng) {
-        super(6, 500, rng);
+        super(5, 500, rng);
     }
 
     public KickerBumper() {
