@@ -4,15 +4,27 @@ import controller.BonusTriggerer;
 
 import java.util.Random;
 
+/**
+ * Target of the Drop kind.
+ *
+ * @author Felipe Canales
+ */
 public class DropTarget extends AbstractTarget {
-    private boolean triggerBonus = true;
     private Random rng;
 
+    /**
+     * Constructor
+     *
+     * @param rng Instance of {@link Random} used to randomize the triggering of {@link logic.bonus.ExtraBallBonus}.
+     */
     public DropTarget(Random rng) {
         super(100);
         this.rng = rng;
     }
 
+    /**
+     * Constructor
+     */
     public DropTarget() {
         this(new Random());
     }

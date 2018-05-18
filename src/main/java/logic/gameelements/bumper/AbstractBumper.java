@@ -6,6 +6,11 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
 
+/**
+ * Abstract class that is the base for bumpers.
+ *
+ * @author Felipe Canales
+ */
 public abstract class AbstractBumper extends Observable implements Bumper {
 
     private boolean upgraded;
@@ -15,6 +20,13 @@ public abstract class AbstractBumper extends Observable implements Bumper {
     private int hitsToUpgrade;
     private int score;
 
+    /**
+     * Constructor
+     *
+     * @param hits  Hits required to upgrade the bumper.
+     * @param score Score received for hitting the bumper.
+     * @param rng   Instance of Random used to randomize the triggering of {@link logic.bonus.ExtraBallBonus}
+     */
     public AbstractBumper(int hits, int score, Random rng) {
         this.upgraded = false;
         this.triggerBonus = false;

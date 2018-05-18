@@ -1,9 +1,11 @@
 package logic.bonus;
 
 public abstract class AbstractBonus implements Bonus {
-
     private int triggered;
 
+    /**
+     * Constructor
+     */
     public AbstractBonus() {
         triggered = 0;
     }

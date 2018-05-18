@@ -7,6 +7,11 @@ import logic.gameelements.target.Target;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Default table of a {@link controller.Game}. It is not playable.
+ *
+ * @author Felipe Canales
+ */
 public class NullTable implements Table{
 
     @Override

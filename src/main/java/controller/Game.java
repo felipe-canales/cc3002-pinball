@@ -15,7 +15,7 @@ import java.util.Observer;
 /**
  * Game logic controller class.
  *
- * @author Juan-Pablo Silva
+ * @author Felipe Canales
  */
 public class Game implements Observer {
     private Table table;
@@ -25,6 +25,9 @@ public class Game implements Observer {
     private int balls;
     private int score;
 
+    /**
+     * Constructor
+     */
     public Game() {
         table = new NullTable();
         extraBall = new ExtraBallBonus();
@@ -50,44 +53,89 @@ public class Game implements Observer {
         hittable.acceptTriggerer(new BonusTriggerer(this));
     }
 
+    /**
+     * Sets the game table.
+     *
+     * @param newTable The {@link Table} that will be part of the game.
+     */
     public void setTable(Table newTable) {
         table = newTable;
         setObservables();
     }
 
+    /**
+     * Gets the game table.
+     *
+     * @return the {@link Table} that is currently part of the game.
+     */
     public Table getTable() {
         return table;
     }
 
+    /**
+     * Gets the number of balls the game currently has.
+     *
+     * @return the number of balls.
+     */
     public int getNumberOfBalls() {
         return balls;
     }
 
+    /**
+     * Decreases the number of balls by one.
+     */
     public void dropBall() {
         if (balls > 0)
             balls--;
     }
 
+    /**
+     * Increases the number of balls by one.
+     */
     public void addBall() {
         balls++;
     }
 
+    /**
+     * Gets the score accumulated.
+     *
+     * @return current score.
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     * Adds score obtained.
+     * @param scoreObtained Score obtained.
+     */
     public void addScore(int scoreObtained) {
         score += scoreObtained;
     }
 
+    /**
+     * Gets the {@link ExtraBallBonus} that is part of the game.
+     *
+     * @return instance of ExtraBallBonus.
+     */
     public ExtraBallBonus getExtraBallBonus() {
         return extraBall;
     }
 
+    /**
+     * Gets the {@link JackPotBonus} that is part of the game.
+     *
+     * @return instance of JackPotBonus.
+     */
     public JackPotBonus getJackPotBonus() {
         return jackPot;
     }
 
+    /**
+     * Gets the {@link DropTargetBonus} that is part of the game.
+     *
+     * @return instance of DropTargetBonus.
+     */
     public DropTargetBonus getDropTargetBonus() {
         return dropBonus;
     }

@@ -3,11 +3,21 @@ package logic.gameelements.target;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Abstract class that is the base for Targets.
+ *
+ * @author Felipe Canales
+ */
 public abstract class AbstractTarget extends Observable implements Target {
 
     private boolean active;
     private int score;
 
+    /**
+     * Constructor
+     *
+     * @param score The score that hitting the target gives.
+     */
     public AbstractTarget(int score) {
         this.score = score;
         this.active = true;
@@ -43,7 +53,7 @@ public abstract class AbstractTarget extends Observable implements Target {
         super.addObserver(o);
     }
 
-    protected void deactivate() {
+    private void deactivate() {
         active = false;
     }
 }

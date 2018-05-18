@@ -12,12 +12,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * A table that can be played on.
+ *
+ * @author Felipe Canales
+ */
 public class PlayableTable implements Table {
     private String name;
     private ArrayList<Bumper> bumpers;
     private ArrayList<Target> targets;
     private int dropTargetIndex;
 
+    /**
+     * Constructor
+     *
+     * @param name                  Name of the table.
+     * @param numberOfBumpers       Number of {@link Bumper}s the table has.
+     * @param prob                  The probability that a Bumper is a {@link PopBumper} or a {@link KickerBumper}.
+     * @param numberOfTargets       Number of {@link SpotTarget}s the table has.
+     * @param numberOfDropTargets   Number of {@link DropTarget}s the table has.
+     * @param rng                   Instance of the class Random used to randomize the bumpers.
+     */
     public PlayableTable(String name, int numberOfBumpers, double prob, int numberOfTargets, int numberOfDropTargets, Random rng) {
         this.name = name;
         this.dropTargetIndex = numberOfTargets;
@@ -38,6 +53,15 @@ public class PlayableTable implements Table {
         }
     }
 
+    /**
+     * Constructor
+     *
+     * @param name                  Name of the table.
+     * @param numberOfBumpers       Number of {@link Bumper}s the table has.
+     * @param prob                  The probability that a Bumper is a {@link PopBumper} or a {@link KickerBumper}.
+     * @param numberOfTargets       Number of {@link SpotTarget}s the table has.
+     * @param numberOfDropTargets   Number of {@link DropTarget}s the table has.
+     */
     public PlayableTable(String name, int numberOfBumpers, double prob, int numberOfTargets, int numberOfDropTargets) {
         this(name, numberOfBumpers, prob, numberOfTargets, numberOfDropTargets, new Random());
     }

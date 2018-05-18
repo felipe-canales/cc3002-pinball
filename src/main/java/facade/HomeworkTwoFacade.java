@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Facade class to expose the logic of the game to a GUI in the upcoming homework.
  *
- * @author Juan-Pablo Silva
+ * @author Felipe Canales
  */
 public class HomeworkTwoFacade {
     /**
