@@ -13,7 +13,7 @@ This class gathers all the common elements between both *PopBumper* and *KickBum
 
 Both of *PopBumper* and *KickBumper* inherit most of their functionality from *AbstractBumper*, only changing the `getScore` method.
 
-[Found here]
+[Found here](../src/main/java/logic/gameelements/bumper)
 
 ### Target
 
@@ -22,6 +22,8 @@ both *SpotTarget* and *DropTarget* inherit their behaviour.
 
 In these case the Bonuses triggered differ between these classes. These Bonuses are triggered through the `acceptTriggerer` method.
 
+[Found here](../src/main/java/logic/gameelements/target)
+
 ### Bonus
 
 This is the last interface that required a common abstract class for all its implementations. Again, there is an *AbstractBonus*
@@ -29,10 +31,14 @@ class, that has *ExtraBallBonus*, *JackPotBonus* and *DropTargetBonus* as sub-cl
 
 The method `trigger` is the only difference between these three.
 
+[Found here](../src/main/java/logic/bonus)
+
 ### Table
 
 There are two classes that are based on this interface. *NullTable*, the first, acts as a placeholder for the second, being an implementation
 of the **Null Object pattern**. *PlayableTable* is the main Table class, satisfying all the behaviour requirements explicited.
+
+[Found here](../src/main/java/logic/table)
 
 ### BonusTriggerer
 
@@ -41,9 +47,13 @@ This is an extra class, used for the implementation of the **Visitor pattern**. 
 
 An instance of BonusTriggerer is created everytime a Bonus has to be triggered, and discarded after.
 
+[Found here](../src/main/java/controller)
+
 ### Game
 
 *Game* is the controller class of the project, and as such, it needs to be able to know when a *Hittable* has been hit.
 This is implemented with the **Observer pattern**, being the *Game* the observer, and the *Hittables* the observables.
 
 In addition to this, *Game* has a variety of methods that are used by *HomeworkTwoFacade's* methods. 
+
+[Found here](../src/main/java/controller)
