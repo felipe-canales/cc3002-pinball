@@ -13,7 +13,8 @@ import entitytype.EntityType;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
-import static gamefactory.GameFactory.*;
+import static gamefactory.StaticElementFactory.*;
+import static gamefactory.InteractiveEntityFactory.*;
 
 public class Pinball extends GameApplication {
 
@@ -22,7 +23,7 @@ public class Pinball extends GameApplication {
         gameSettings.setWidth(600);
         gameSettings.setHeight(600);
         gameSettings.setTitle("Game Window");
-        gameSettings.setVersion("0.1");
+        gameSettings.setVersion("0.2");
     }
 
     @Override
@@ -30,7 +31,7 @@ public class Pinball extends GameApplication {
         Entity bg = newBackground();
         Entity lFlipper = newFlipper();
         Entity ball = newBall();
-        Entity walls = newWalls();
+        Entity walls = newBorderWalls();
         lFlipper.setRotation(20);
 
         getGameWorld().addEntities(bg, lFlipper, ball, walls);
