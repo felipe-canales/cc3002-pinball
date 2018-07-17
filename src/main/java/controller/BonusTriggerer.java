@@ -36,6 +36,7 @@ public class BonusTriggerer {
      */
     public void triggerDropTargetBonus() {
         game.getDropTargetBonus().trigger(game);
+        game.getTable().resetDropTargets();
     }
 
     /**

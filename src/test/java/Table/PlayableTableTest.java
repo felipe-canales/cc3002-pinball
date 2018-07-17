@@ -38,6 +38,20 @@ public class PlayableTableTest {
     }
 
     @Test
+    public void hittingOneDropTarget() {
+        p.getTargets().get(3).hit();
+        assertEquals(1, p.getCurrentlyDroppedDropTargets());
+    }
+
+    @Test
+    public void resettingOneDroppedTargets() {
+        for (Target t: p.getTargets())
+            t.hit();
+        p.getTargets().get(3).reset();
+        assertEquals(1, p.getCurrentlyDroppedDropTargets());
+    }
+
+    @Test
     public void gettingBumpers() {
         assertEquals(10, p.getBumpers().size());
     }
