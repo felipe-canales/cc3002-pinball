@@ -1,8 +1,8 @@
 package logic.table;
 
-import controller.BonusTriggerer;
 import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
+import visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ public class NullTable implements Table{
     }
 
     @Override
-    public void acceptTriggerer(BonusTriggerer bonusTriggerer) {
-
+    public void acceptVisitor(Visitor v) {
+        v.visitNullTable(this);
     }
 }

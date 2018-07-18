@@ -1,8 +1,9 @@
 package logic.gameelements;
 
-import controller.BonusTriggerer;
+import visitor.Visitor;
 
 import java.util.Observer;
+import java.util.Random;
 
 /**
  * Interface that represents a hittable object.
@@ -30,11 +31,11 @@ public interface Hittable {
     int getScore();
 
     /**
-     * Receives a {@link BonusTriggerer} and, if appropiate, triggers a {@link logic.bonus.Bonus}.
+     * Receives a {@link Visitor}.
      *
-     * @param bonusTriggerer Instance of {@link BonusTriggerer}
+     * @param v Instance of {@link Visitor}
      */
-    void acceptTriggerer(BonusTriggerer bonusTriggerer);
+    void acceptVisitor(Visitor v);
 
     /**
      * Adds an {@link java.util.Observer} as a listener of this hittable.
@@ -42,4 +43,10 @@ public interface Hittable {
      * @param o
      */
     void addObserver(Observer o);
+
+    /**
+     * Returns the instance of {@link Random} in the hittable.
+     * @return rng
+     */
+    Random getRNG();
 }

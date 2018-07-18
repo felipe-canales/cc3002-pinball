@@ -1,8 +1,8 @@
 package logic.table;
 
-import controller.BonusTriggerer;
 import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
+import visitor.Visitor;
 
 import java.util.List;
 
@@ -65,9 +65,9 @@ public interface Table {
     boolean isPlayableTable();
 
     /**
-     * Receives a {@link BonusTriggerer} and, if appropiate, triggers the {@link logic.bonus.DropTargetBonus}
+     * Receives a {@link Visitor}.
      *
-     * @param bonusTriggerer Instance of {@link BonusTriggerer}
+     * @param v Instance of {@link Visitor}
      */
-    void acceptTriggerer(BonusTriggerer bonusTriggerer);
+    void acceptVisitor(Visitor v);
 }

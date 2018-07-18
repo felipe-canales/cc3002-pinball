@@ -1,6 +1,8 @@
 package logic.gameelements.target;
 
-import controller.BonusTriggerer;
+import visitor.Visitor;
+
+import java.util.Random;
 
 /**
  * Target of the Spot kind.
@@ -16,7 +18,13 @@ public class SpotTarget extends AbstractTarget {
     }
 
     @Override
-    public void acceptTriggerer(BonusTriggerer bonusTriggerer) {
-        bonusTriggerer.triggerJackPotBonus();
+    public void acceptVisitor(Visitor v) {
+        v.visitSpotTarget(this);
+    }
+
+
+    @Override
+    public Random getRNG() {
+        return null;
     }
 }

@@ -1,12 +1,12 @@
 package logic.table;
 
-import controller.BonusTriggerer;
 import logic.gameelements.bumper.Bumper;
 import logic.gameelements.bumper.KickerBumper;
 import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;
 import logic.gameelements.target.Target;
+import visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,8 +116,7 @@ public class PlayableTable implements Table {
     }
 
     @Override
-    public void acceptTriggerer(BonusTriggerer bonusTriggerer) {
-        if (getNumberOfDropTargets() == getCurrentlyDroppedDropTargets())
-            bonusTriggerer.triggerDropTargetBonus();
+    public void acceptVisitor(Visitor v) {
+        v.visitPlayableTable(this);
     }
 }

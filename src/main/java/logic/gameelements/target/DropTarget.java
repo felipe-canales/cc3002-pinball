@@ -1,6 +1,6 @@
 package logic.gameelements.target;
 
-import controller.BonusTriggerer;
+import visitor.Visitor;
 
 import java.util.Random;
 
@@ -30,10 +30,12 @@ public class DropTarget extends AbstractTarget {
     }
 
     @Override
-    public void acceptTriggerer(BonusTriggerer bonusTriggerer) {
-        if (rng.nextDouble() < 0.3) {
-            bonusTriggerer.triggerExtraBallBonus();
-        }
-        bonusTriggerer.checkDropTargetBonus();
+    public void acceptVisitor(Visitor v) {
+        v.visitDropTarget(this);
+    }
+
+    @Override
+    public Random getRNG() {
+        return rng;
     }
 }

@@ -1,5 +1,7 @@
 package logic.gameelements.bumper;
 
+import visitor.Visitor;
+
 import java.util.Random;
 
 /**
@@ -27,5 +29,10 @@ public class PopBumper extends AbstractBumper {
     @Override
     public int getScore() {
         return super.getScore() * (isUpgraded()? 3: 1);
+    }
+
+    @Override
+    public void acceptVisitor(Visitor v) {
+        v.visitPopBumper(this);
     }
 }

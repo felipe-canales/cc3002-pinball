@@ -8,6 +8,7 @@ import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
 import logic.table.NullTable;
 import logic.table.Table;
+import visitor.BonusTriggerer;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -48,9 +49,11 @@ public class Game implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        Hittable hittable = (Hittable)o;
-        addScore(hittable.getScore());
-        hittable.acceptTriggerer(new BonusTriggerer(this));
+        if (o instanceof Hittable) {
+            Hittable hittable = (Hittable) o;
+            addScore(hittable.getScore());
+            hittable.acceptVisitor(new BonusTriggerer(this));
+        }
     }
 
     /**

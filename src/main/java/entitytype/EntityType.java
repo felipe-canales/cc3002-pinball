@@ -4,5 +4,7 @@ public enum EntityType {
     LEFTFLIPPER,
     RIGHTFLIPPER,
     BALL,
-    WALL
+    WALL,
+    BUMPER,
+    TARGET
 }

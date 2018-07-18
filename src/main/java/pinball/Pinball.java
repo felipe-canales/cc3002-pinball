@@ -10,12 +10,15 @@ import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.settings.GameSettings;
 
 import entitytype.EntityType;
+import facade.HomeworkTwoFacade;
+import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
 import static gamefactory.StaticElementFactory.*;
 import static gamefactory.InteractiveEntityFactory.*;
 
 public class Pinball extends GameApplication {
+    HomeworkTwoFacade game;
 
     @Override
     protected void initSettings(GameSettings gameSettings) {
@@ -30,15 +33,15 @@ public class Pinball extends GameApplication {
         Entity bg = newBackground();
         Entity walls = newBorderWalls();
         Entity upperCorner = newWall(550, -50, 100, 100, 45.0);
-        Entity leftFlipperWall = newWall(-120, 330, 300, 300, 30);
-        Entity rightFlipperWall = newWall(420, 330, 300, 300, -30);
+        Entity leftFlipperWall = newWall(-120, 370, 300, 300, 30);
+        Entity rightFlipperWall = newWall(420, 370, 300, 300, -30);
         Entity lFlipper = newLeftFlipper();
         Entity rFlipper = newRightFlipper();
-        Entity ball = newBall();
-        lFlipper.setRotation(20);
 
-        getGameWorld().addEntities(bg, lFlipper, rFlipper, ball, walls, upperCorner,
-                leftFlipperWall, rightFlipperWall);
+        game = new HomeworkTwoFacade();
+
+        getGameWorld().addEntities(bg, lFlipper, rFlipper,
+                walls, upperCorner, leftFlipperWall, rightFlipperWall);
     }
 
     @Override
@@ -78,6 +81,14 @@ public class Pinball extends GameApplication {
                         .forEach(e -> e.setRotation(-20));
             }
         }, KeyCode.S);
+
+        input.addAction(new UserAction("New ball") {
+            @Override
+            protected void onActionBegin() {
+                if (getGameWorld().getEntitiesByType(EntityType.BALL).size() == 0)
+                    getGameWorld().addEntity(newBall());
+            }
+        }, KeyCode.SPACE);
     }
 
     @Override
@@ -97,12 +108,26 @@ public class Pinball extends GameApplication {
         getPhysicsWorld().addCollisionHandler(
                 new CollisionHandler(EntityType.BALL, EntityType.LEFTFLIPPER) {
                     @Override
-                    protected void onCollisionBegin(Entity ball, Entity flipper) {
-                        ball.getComponent(PhysicsComponent.class).setVelocityY(
-                                -ball.getComponent(PhysicsComponent.class).getVelocityY());
+                    protected void onCollision(Entity ball, Entity flipper) {
+                        ball.getComponent(PhysicsComponent.class).applyForceToCenter(new Point2D(10,-200));
                     }
                 }
         );
+
+        getPhysicsWorld().addCollisionHandler(
+                new CollisionHandler(EntityType.BALL, EntityType.RIGHTFLIPPER) {
+                    @Override
+                    protected void onCollision(Entity ball, Entity flipper) {
+                        PhysicsComponent ballPhysics = ball.getComponent(PhysicsComponent.class);
+                        //ballPhysics.setLinearVelocity(0, 0);
+                        ballPhysics.applyForceToCenter(new Point2D(-10,-200));
+                    }
+                }
+        );
+    }
+
+    private void setNewTable() {
+        //game.newFullPlayableTable()
     }
 
     public static void main(String[] args) {

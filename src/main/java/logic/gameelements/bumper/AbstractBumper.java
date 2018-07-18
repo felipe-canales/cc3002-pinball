@@ -1,7 +1,5 @@
 package logic.gameelements.bumper;
 
-import controller.BonusTriggerer;
-
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
@@ -82,15 +80,21 @@ public abstract class AbstractBumper extends Observable implements Bumper {
     }
 
     @Override
-    public void acceptTriggerer(BonusTriggerer bonusTriggerer) {
+    public boolean shouldTriggerbonus() {
         if (triggerBonus) {
-            bonusTriggerer.triggerExtraBallBonus();
             triggerBonus = false;
+            return true;
         }
+        return false;
     }
 
     @Override
     public void addObserver(Observer o) {
         super.addObserver(o);
+    }
+
+    @Override
+    public Random getRNG() {
+        return rng;
     }
 }
