@@ -1,10 +1,6 @@
 package visitor;
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
-import javafx.scene.shape.Circle;
-import logic.gameelements.Hittable;
+import com.almasb.fxgl.audio.AudioPlayer;
 import logic.gameelements.bumper.KickerBumper;
 import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
@@ -12,43 +8,43 @@ import logic.gameelements.target.SpotTarget;
 import logic.table.NullTable;
 import logic.table.PlayableTable;
 
-public class NormalShapePicker implements Visitor{
-    Shape shape;
+public class HittableSoundPlayer implements Visitor{
+    AudioPlayer player;
 
-    public NormalShapePicker(Hittable h) {
-        h.acceptVisitor(this);
+    HittableSoundPlayer(AudioPlayer player) {
+        this.player = player;
     }
 
     @Override
     public void visitKickerBumper(KickerBumper k) {
         if (k.isUpgraded())
-            shape = new Circle(20, Color.RED);
+            player.playSound("bumper1up.wav");
         else
-            shape = new Circle(20, Color.DARKRED);
+            player.playSound("bumper1.wav");
     }
 
     @Override
     public void visitPopBumper(PopBumper p) {
         if (p.isUpgraded())
-            shape = new Circle(18, Color.AQUAMARINE);
+            player.playSound("bumper2up.wav");
         else
-            shape = new Circle(18, Color.TEAL);
+            player.playSound("bumper2.wav");
     }
 
     @Override
     public void visitSpotTarget(SpotTarget s) {
         if (s.isActive())
-            shape = new Rectangle(30, 30, Color.PURPLE);
+            player.playSound("target1active.wav");
         else
-            shape = new Rectangle(30, 30, Color.GRAY);
+            player.playSound("target1inactive.wav");
     }
 
     @Override
     public void visitDropTarget(DropTarget d) {
         if (d.isActive())
-            shape = new Rectangle(25, 25, Color.DARKOLIVEGREEN);
+            player.playSound("target2active.wav");
         else
-            shape = new Rectangle(25, 25, Color.DARKGRAY);
+            player.playSound("target2inactive.wav");
     }
 
     @Override
@@ -59,9 +55,5 @@ public class NormalShapePicker implements Visitor{
     @Override
     public void visitPlayableTable(PlayableTable p) {
 
-    }
-
-    public Shape getShape() {
-        return shape;
     }
 }
