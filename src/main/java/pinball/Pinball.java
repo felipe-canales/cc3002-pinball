@@ -10,21 +10,20 @@ import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.settings.GameSettings;
 import component.BumperComponent;
 import component.TargetComponent;
-import javafx.beans.Observable;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
 import entitytype.EntityType;
 import facade.HomeworkTwoFacade;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import logic.gameelements.Hittable;
 import logic.table.Table;
 import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
+import visitor.AlternateShapePicker;
 
 import java.util.Map;
-import java.util.Observer;
 import java.util.Random;
 
 import static gamefactory.StaticElementFactory.*;
@@ -141,8 +140,7 @@ public class Pinball extends GameApplication {
                 new CollisionHandler(EntityType.BALL, EntityType.RIGHTFLIPPER) {
                     @Override
                     protected void onCollision(Entity ball, Entity flipper) {
-                        PhysicsComponent ballPhysics = ball.getComponent(PhysicsComponent.class);
-                        ballPhysics.applyForceToCenter(new Point2D(-10, -200));
+                        ball.getComponent(PhysicsComponent.class).applyForceToCenter(new Point2D(-10, -200));
                     }
                 }
         );
@@ -150,7 +148,11 @@ public class Pinball extends GameApplication {
                 new CollisionHandler(EntityType.BALL, EntityType.BUMPER) {
                     @Override
                     protected void onHitBoxTrigger(Entity ball, Entity bumper, HitBox boxBall, HitBox boxBumper) {
-                        bumper.getComponent(BumperComponent.class).hit();
+                        BumperComponent bumperState = bumper.getComponent(BumperComponent.class);
+                        boolean state = bumperState.isAlternateState();
+                        bumperState.hit();
+                        if (state != bumperState.isAlternateState())
+                            bumperState.changeView();
                         updateUI();
                     }
                 }
@@ -159,7 +161,13 @@ public class Pinball extends GameApplication {
                 new CollisionHandler(EntityType.BALL, EntityType.TARGET) {
                     @Override
                     protected void onHitBoxTrigger(Entity ball, Entity target, HitBox boxBall, HitBox boxTarget) {
-                        target.getComponent(TargetComponent.class).hit();
+                        TargetComponent targetState = target.getComponent(TargetComponent.class);
+                        int timesTriggered = game.getDropTargetBonus().timesTriggered();
+                        targetState.hit();
+                        targetState.changeView();
+                        System.out.println(targetState.isAlternateState());
+                        if (game.getDropTargetBonus().timesTriggered() > timesTriggered)
+                            updateAllElements();
                         updateUI();
                     }
                 }
@@ -185,9 +193,9 @@ public class Pinball extends GameApplication {
         textBalls.setFont(font);
         textScore.setFont(font);
         textBalls.setTranslateX(100);
-        textBalls.setTranslateY(500);
+        textBalls.setTranslateY(550);
         textScore.setTranslateX(500);
-        textScore.setTranslateY(500);
+        textScore.setTranslateY(550);
 
         textBalls.textProperty().bind(getGameState().intProperty("balls").asString());
         textScore.textProperty().bind(getGameState().intProperty("score").asString());
@@ -208,6 +216,19 @@ public class Pinball extends GameApplication {
             getGameWorld().addEntity(newTarget(rng.nextInt(550), rng.nextInt(400), t));
         game.setGameTable(table);
         getGameWorld().addEntity(newBall());
+    }
+
+    private void updateAllElements() {
+        for (Entity e : getGameWorld().getEntitiesByType(EntityType.BUMPER)) {
+            BumperComponent bumper = e.getComponent(BumperComponent.class);
+            if (bumper.isAlternateState())
+                bumper.changeView();
+        }
+        for (Entity e : getGameWorld().getEntitiesByType(EntityType.TARGET)) {
+            TargetComponent target = e.getComponent(TargetComponent.class);
+            if (!target.isAlternateState())
+                target.resetView();
+        }
     }
 
     public static void main(String[] args) {
