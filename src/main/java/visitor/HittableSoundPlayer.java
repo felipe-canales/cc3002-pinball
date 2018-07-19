@@ -1,6 +1,5 @@
 package visitor;
 
-import com.almasb.fxgl.audio.AudioPlayer;
 import component.HittableComponent;
 import logic.gameelements.bumper.KickerBumper;
 import logic.gameelements.bumper.PopBumper;
@@ -10,43 +9,42 @@ import logic.table.NullTable;
 import logic.table.PlayableTable;
 
 public class HittableSoundPlayer implements Visitor{
-    AudioPlayer player;
+    private String soundName;
 
-    HittableSoundPlayer(AudioPlayer player, HittableComponent hittable) {
-        this.player = player;
+    public HittableSoundPlayer(HittableComponent hittable) {
         hittable.accept(this);
     }
 
     @Override
     public void visitKickerBumper(KickerBumper k) {
         if (k.isUpgraded())
-            player.playSound("bumper1up.wav");
+            soundName = "bumper1up.wav";
         else
-            player.playSound("bumper1.wav");
+            soundName = "bumper1.wav";
     }
 
     @Override
     public void visitPopBumper(PopBumper p) {
         if (p.isUpgraded())
-            player.playSound("bumper2up.wav");
+            soundName = "bumper2up.wav";
         else
-            player.playSound("bumper2.wav");
+            soundName = "bumper2.wav";
     }
 
     @Override
     public void visitSpotTarget(SpotTarget s) {
         if (s.isActive())
-            player.playSound("target1active.wav");
+            soundName = "target1active.wav";
         else
-            player.playSound("target1inactive.wav");
+        soundName = "target1inactive.wav";
     }
 
     @Override
     public void visitDropTarget(DropTarget d) {
         if (d.isActive())
-            player.playSound("target2active.wav");
+            soundName = "target2active.wav";
         else
-            player.playSound("target2inactive.wav");
+            soundName = "target2inactive.wav";
     }
 
     @Override
@@ -57,5 +55,9 @@ public class HittableSoundPlayer implements Visitor{
     @Override
     public void visitPlayableTable(PlayableTable p) {
 
+    }
+
+    public String getSound() {
+        return soundName;
     }
 }
