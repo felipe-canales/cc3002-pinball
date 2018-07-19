@@ -89,13 +89,16 @@ public class Pinball extends GameApplication {
         input.addAction(new UserAction("New ball") {
             @Override
             protected void onActionBegin() {
-                if (getGameWorld().getEntitiesByType(EntityType.BALL).size() == 0)
+                if (getGameWorld().getEntitiesByType(EntityType.BALL).size() == 0
+                        && !game.gameOver())
                     getGameWorld().addEntity(newBall());
             }
         }, KeyCode.SPACE);
         input.addAction(new UserAction("New table") {
             @Override
             protected void onActionBegin() {
+                getGameWorld().getEntitiesByType(EntityType.BUMPER).forEach(e -> e.removeFromWorld());
+                getGameWorld().getEntitiesByType(EntityType.TARGET).forEach(e -> e.removeFromWorld());
                 getGameWorld().getEntitiesByType(EntityType.BALL).forEach(e -> e.removeFromWorld());
                 setNewTable();
             }
@@ -110,8 +113,10 @@ public class Pinball extends GameApplication {
                 new CollisionHandler(EntityType.BALL, EntityType.WALL) {
                     @Override
                     protected void onHitBoxTrigger(Entity ball, Entity wall, HitBox boxBall, HitBox boxWall) {
-                        if (boxWall.getName().equals("BOT"))
+                        if (boxWall.getName().equals("BOT")) {
                             ball.removeFromWorld();
+                            game.dropBall();
+                        }
                     }
                 }
         );
@@ -132,6 +137,11 @@ public class Pinball extends GameApplication {
                     }
                 }
         );
+    }
+
+    @Override
+    protected void initUI() {
+        super.initUI();
     }
 
     private void setNewTable() {

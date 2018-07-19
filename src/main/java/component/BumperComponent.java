@@ -1,17 +1,28 @@
 package component;
 
+import com.almasb.fxgl.entity.component.Component;
 import logic.gameelements.bumper.Bumper;
 
-public class BumperComponent extends HittableComponent {
+
+public class BumperComponent extends Component implements HittableComponent {
+    private Bumper bumper;
+
     public BumperComponent(Bumper b) {
-        super(b);
+        bumper = b;
     }
 
-    public void downgrade() {
-        ((Bumper)getGameElement()).downgrade();
+    @Override
+    public void hit() {
+        bumper.hit();
     }
 
-    public boolean isUpgraded() {
-        return ((Bumper)getGameElement()).isUpgraded();
+    @Override
+    public boolean isAlternateState() {
+        return bumper.isUpgraded();
+    }
+
+    @Override
+    public void resetState() {
+        bumper.downgrade();
     }
 }

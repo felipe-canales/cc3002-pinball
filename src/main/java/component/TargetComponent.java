@@ -1,18 +1,27 @@
 package component;
 
+import com.almasb.fxgl.entity.component.Component;
 import logic.gameelements.target.Target;
 
-public class TargetComponent extends HittableComponent {
+public class TargetComponent extends Component implements HittableComponent {
+    Target target;
 
     public TargetComponent(Target t) {
-        super(t);
+        target = t;
     }
 
-    public boolean isActive() {
-        return ((Target)getGameElement()).isActive();
+    @Override
+    public void hit() {
+        target.hit();
     }
 
-    public void reset() {
-        ((Target)getGameElement()).reset();
+    @Override
+    public boolean isAlternateState() {
+        return target.isActive();
+    }
+
+    @Override
+    public void resetState() {
+        target.reset();
     }
 }
