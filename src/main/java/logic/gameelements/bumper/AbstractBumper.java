@@ -38,10 +38,11 @@ public abstract class AbstractBumper extends Observable implements Bumper {
         if (isUpgraded())
             return;
         hitsToUpgrade--;
-        if (remainingHitsToUpgrade() == 0)
+        if (remainingHitsToUpgrade() == 0) {
             upgrade();
             if (rng.nextDouble() < 0.1)
                 triggerBonus = true;
+        }
     }
 
     @Override

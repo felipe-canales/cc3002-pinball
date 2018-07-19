@@ -9,19 +9,20 @@ import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.settings.GameSettings;
 import component.BumperComponent;
+import component.HittableComponent;
 import component.TargetComponent;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import entitytype.EntityType;
 import facade.HomeworkTwoFacade;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import logic.table.Table;
 import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
-import visitor.AlternateShapePicker;
+import visitor.ResetTime;
 
 import java.util.Map;
 import java.util.Random;
@@ -30,7 +31,7 @@ import static gamefactory.StaticElementFactory.*;
 import static gamefactory.InteractiveEntityFactory.*;
 
 public class Pinball extends GameApplication {
-    HomeworkTwoFacade game;
+    private HomeworkTwoFacade game;
 
     @Override
     protected void initSettings(GameSettings gameSettings) {
@@ -104,8 +105,14 @@ public class Pinball extends GameApplication {
         input.addAction(new UserAction("New table") {
             @Override
             protected void onActionBegin() {
-                getGameWorld().getEntitiesByType(EntityType.BUMPER).forEach(e -> e.removeFromWorld());
-                getGameWorld().getEntitiesByType(EntityType.TARGET).forEach(e -> e.removeFromWorld());
+                getGameWorld().getEntitiesByType(EntityType.BUMPER).forEach(e -> {
+                    e.getComponent(BumperComponent.class).expireTimerAction();
+                    e.removeFromWorld();
+                });
+                getGameWorld().getEntitiesByType(EntityType.TARGET).forEach(e -> {
+                    e.getComponent(TargetComponent.class).expireTimerAction();
+                    e.removeFromWorld();
+                });
                 getGameWorld().getEntitiesByType(EntityType.BALL).forEach(e -> e.removeFromWorld());
                 setNewTable();
             }
@@ -151,8 +158,10 @@ public class Pinball extends GameApplication {
                         BumperComponent bumperState = bumper.getComponent(BumperComponent.class);
                         boolean state = bumperState.isAlternateState();
                         bumperState.hit();
-                        if (state != bumperState.isAlternateState())
+                        if (state != bumperState.isAlternateState()) {
                             bumperState.changeView();
+                            resetTimer(bumperState);
+                        }
                         updateUI();
                     }
                 }
@@ -168,6 +177,7 @@ public class Pinball extends GameApplication {
                         System.out.println(targetState.isAlternateState());
                         if (game.getDropTargetBonus().timesTriggered() > timesTriggered)
                             updateAllElements();
+                        else resetTimer(targetState);
                         updateUI();
                     }
                 }
@@ -221,14 +231,24 @@ public class Pinball extends GameApplication {
     private void updateAllElements() {
         for (Entity e : getGameWorld().getEntitiesByType(EntityType.BUMPER)) {
             BumperComponent bumper = e.getComponent(BumperComponent.class);
-            if (bumper.isAlternateState())
+            if (bumper.isAlternateState()) {
                 bumper.changeView();
+                resetTimer(bumper);
+            }
         }
         for (Entity e : getGameWorld().getEntitiesByType(EntityType.TARGET)) {
             TargetComponent target = e.getComponent(TargetComponent.class);
-            if (!target.isAlternateState())
+            if (!target.isAlternateState()) {
                 target.resetView();
+                target.expireTimerAction();
+            }
         }
+    }
+
+    private void resetTimer(HittableComponent hittable) {
+        hittable.setTimerAction(
+                getMasterTimer().runOnceAfter(() -> hittable.resetState(),
+                        Duration.seconds(new ResetTime(hittable).getTime())));
     }
 
     public static void main(String[] args) {
