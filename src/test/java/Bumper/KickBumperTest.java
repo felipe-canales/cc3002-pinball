@@ -3,6 +3,8 @@ package Bumper;
 import logic.gameelements.bumper.KickerBumper;
 import org.junit.*;
 
+import java.util.Random;
+
 import static org.junit.Assert.*;
 
 public class KickBumperTest {
@@ -53,5 +55,12 @@ public class KickBumperTest {
         for (int i = 0; i < 6; i++)
             kick.hit();
         assertEquals("KickerBumper's remaining hits can't be negative", 0, kick.remainingHitsToUpgrade());
+    }
+
+    @Test
+    public void getRNG() {
+        Random rng = new Random();
+        KickerBumper k = new KickerBumper(rng);
+        assertEquals(k.getRNG(), rng);
     }
 }

@@ -3,6 +3,8 @@ package Bumper;
 import logic.gameelements.bumper.PopBumper;
 import org.junit.*;
 
+import java.util.Random;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -54,5 +56,12 @@ public class PopBumperTest {
         for (int i = 0; i < 4; i++)
             pop.hit();
         assertEquals("PopBumper's remaining hits can't be negative", 0, pop.remainingHitsToUpgrade());
+    }
+
+    @Test
+    public void getRNG() {
+        Random rng = new Random();
+        PopBumper p = new PopBumper(rng);
+        assertEquals(p.getRNG(), rng);
     }
 }

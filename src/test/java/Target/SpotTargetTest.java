@@ -4,6 +4,8 @@ import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;
 import org.junit.*;
 
+import java.util.Random;
+
 import static org.junit.Assert.*;
 
 public class SpotTargetTest {
@@ -39,5 +41,10 @@ public class SpotTargetTest {
     public void scoreWhenNotActive() {
         spot.hit();
         assertEquals(0,spot.hit());
+    }
+
+    @Test
+    public void getRNG() {
+        assertEquals(spot.getRNG(), null);
     }
 }

@@ -44,4 +44,12 @@ public class DropTargetBonusTest {
             assertTrue(b.isUpgraded());
         }
     }
+
+    @Test
+    public void resettingDropTargets() {
+        PlayableTable t = new PlayableTable("test",0,0,0,1);
+        game.setTable(t);
+        t.getTargets().get(0).hit();
+        assertTrue(t.getTargets().get(0).isActive());
+    }
 }
