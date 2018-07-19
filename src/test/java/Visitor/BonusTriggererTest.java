@@ -1,3 +1,5 @@
+package Visitor;
+
 import logic.gameelements.bumper.KickerBumper;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;

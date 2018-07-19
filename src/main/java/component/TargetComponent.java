@@ -19,7 +19,7 @@ public class TargetComponent extends Component implements HittableComponent {
 
     @Override
     public boolean isAlternateState() {
-        return target.isActive();
+        return !target.isActive();
     }
 
     @Override
