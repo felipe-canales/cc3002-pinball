@@ -173,8 +173,8 @@ public class Pinball extends GameApplication {
                         TargetComponent targetState = target.getComponent(TargetComponent.class);
                         int timesTriggered = game.getDropTargetBonus().timesTriggered();
                         targetState.hit();
+                        
                         targetState.changeView();
-                        System.out.println(targetState.isAlternateState());
                         if (game.getDropTargetBonus().timesTriggered() > timesTriggered)
                             updateAllElements();
                         else resetTimer(targetState);
@@ -239,7 +239,7 @@ public class Pinball extends GameApplication {
         for (Entity e : getGameWorld().getEntitiesByType(EntityType.TARGET)) {
             TargetComponent target = e.getComponent(TargetComponent.class);
             if (!target.isAlternateState()) {
-                target.resetView();
+                target.changeView();
                 target.expireTimerAction();
             }
         }

@@ -4,8 +4,7 @@ import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.time.TimerAction;
 import javafx.util.Duration;
 import logic.gameelements.bumper.Bumper;
-import visitor.AlternateShapePicker;
-import visitor.NormalShapePicker;
+import visitor.ShapePicker;
 import visitor.Visitor;
 
 
@@ -31,17 +30,12 @@ public class BumperComponent extends Component implements HittableComponent {
     @Override
     public void resetState() {
         bumper.downgrade();
-        resetView();
-    }
-
-    @Override
-    public void resetView() {
-        super.entity.getViewComponent().setView(new NormalShapePicker(bumper).getShape());
+        changeView();
     }
 
     @Override
     public void changeView() {
-        super.entity.getViewComponent().setView(new AlternateShapePicker(bumper).getShape());
+        super.entity.getViewComponent().setView(new ShapePicker(bumper).getShape());
     }
 
     @Override

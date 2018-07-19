@@ -7,7 +7,6 @@ public interface HittableComponent {
     void hit();
     boolean isAlternateState();
     void resetState();
-    void resetView();
     void changeView();
     void setTimerAction(TimerAction timerAction);
     void expireTimerAction();

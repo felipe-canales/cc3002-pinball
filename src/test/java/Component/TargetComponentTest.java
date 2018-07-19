@@ -1,12 +1,9 @@
 package Component;
 
-import com.almasb.fxgl.entity.Entities;
-import com.almasb.fxgl.entity.Entity;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.Target;
 import component.TargetComponent;
 import org.junit.*;
-import visitor.NormalShapePicker;
 
 import static org.junit.Assert.*;
 
@@ -39,7 +36,7 @@ public class TargetComponentTest {
 
     /*@Test
     public void resetState() {
-        Entity e = Entities.builder().viewFromNodeWithBBox(new NormalShapePicker(t).getShape()).with(tc).build();
+        Entity e = Entities.builder().viewFromNodeWithBBox(new ShapePicker(t).getShape()).with(tc).build();
         t.hit();
         tc.resetState();
         assertTrue(t.isActive());

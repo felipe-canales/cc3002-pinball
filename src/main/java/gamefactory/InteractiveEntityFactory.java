@@ -16,7 +16,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
-import visitor.NormalShapePicker;
+import visitor.ShapePicker;
 
 public class InteractiveEntityFactory {
     public static Entity newLeftFlipper() {
@@ -62,7 +62,7 @@ public class InteractiveEntityFactory {
         return Entities.builder()
                 .at(x, y)
                 .type(EntityType.BUMPER)
-                .viewFromNodeWithBBox(new NormalShapePicker(b).getShape())
+                .viewFromNodeWithBBox(new ShapePicker(b).getShape())
                 .with(new PhysicsComponent(), new BumperComponent(b), new CollidableComponent(true))
                 .build();
     }
@@ -71,7 +71,7 @@ public class InteractiveEntityFactory {
         return Entities.builder()
                 .at(x, y)
                 .type(EntityType.TARGET)
-                .viewFromNodeWithBBox(new NormalShapePicker(t).getShape())
+                .viewFromNodeWithBBox(new ShapePicker(t).getShape())
                 .with(new PhysicsComponent(), new TargetComponent(t), new CollidableComponent(true))
                 .build();
     }

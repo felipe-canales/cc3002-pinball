@@ -1,6 +1,7 @@
 package visitor;
 
 import com.almasb.fxgl.audio.AudioPlayer;
+import component.HittableComponent;
 import logic.gameelements.bumper.KickerBumper;
 import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
@@ -11,8 +12,9 @@ import logic.table.PlayableTable;
 public class HittableSoundPlayer implements Visitor{
     AudioPlayer player;
 
-    HittableSoundPlayer(AudioPlayer player) {
+    HittableSoundPlayer(AudioPlayer player, HittableComponent hittable) {
         this.player = player;
+        hittable.accept(this);
     }
 
     @Override

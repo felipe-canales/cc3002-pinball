@@ -4,8 +4,7 @@ import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.time.TimerAction;
 import javafx.util.Duration;
 import logic.gameelements.target.Target;
-import visitor.AlternateShapePicker;
-import visitor.NormalShapePicker;
+import visitor.ShapePicker;
 import visitor.Visitor;
 
 public class TargetComponent extends Component implements HittableComponent {
@@ -30,17 +29,12 @@ public class TargetComponent extends Component implements HittableComponent {
     @Override
     public void resetState() {
         target.reset();
-        resetView();
-    }
-
-    @Override
-    public void resetView() {
-        super.entity.getViewComponent().setView(new NormalShapePicker(target).getShape());
+        changeView();
     }
 
     @Override
     public void changeView() {
-        super.entity.getViewComponent().setView(new AlternateShapePicker(target).getShape());
+        super.entity.getViewComponent().setView(new ShapePicker(target).getShape());
     }
 
     @Override
