@@ -63,7 +63,7 @@ public class InteractiveEntityFactory {
                 .at(x, y)
                 .type(EntityType.BUMPER)
                 .viewFromNodeWithBBox(new ShapePicker(b).getShape())
-                .with(new PhysicsComponent(), new BumperComponent(b))
+                .with(new PhysicsComponent(), new BumperComponent(b), new CollidableComponent(true))
                 .build();
     }
 
@@ -72,7 +72,7 @@ public class InteractiveEntityFactory {
                 .at(x, y)
                 .type(EntityType.TARGET)
                 .viewFromNodeWithBBox(new ShapePicker(t).getShape())
-                .with(new PhysicsComponent(), new TargetComponent(t))
+                .with(new PhysicsComponent(), new TargetComponent(t), new CollidableComponent(true))
                 .build();
     }
 }

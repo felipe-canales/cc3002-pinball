@@ -8,15 +8,23 @@ import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.settings.GameSettings;
+import component.BumperComponent;
+import component.TargetComponent;
+import javafx.beans.Observable;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
 import entitytype.EntityType;
 import facade.HomeworkTwoFacade;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import logic.gameelements.Hittable;
 import logic.table.Table;
 import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
 
+import java.util.Map;
+import java.util.Observer;
 import java.util.Random;
 
 import static gamefactory.StaticElementFactory.*;
@@ -116,6 +124,7 @@ public class Pinball extends GameApplication {
                         if (boxWall.getName().equals("BOT")) {
                             ball.removeFromWorld();
                             game.dropBall();
+                            updateUI();
                         }
                     }
                 }
@@ -137,11 +146,56 @@ public class Pinball extends GameApplication {
                     }
                 }
         );
+        getPhysicsWorld().addCollisionHandler(
+                new CollisionHandler(EntityType.BALL, EntityType.BUMPER) {
+                    @Override
+                    protected void onHitBoxTrigger(Entity ball, Entity bumper, HitBox boxBall, HitBox boxBumper) {
+                        bumper.getComponent(BumperComponent.class).hit();
+                        updateUI();
+                    }
+                }
+        );
+        getPhysicsWorld().addCollisionHandler(
+                new CollisionHandler(EntityType.BALL, EntityType.TARGET) {
+                    @Override
+                    protected void onHitBoxTrigger(Entity ball, Entity target, HitBox boxBall, HitBox boxTarget) {
+                        target.getComponent(TargetComponent.class).hit();
+                        updateUI();
+                    }
+                }
+        );
+    }
+
+    private void updateUI() {
+        getGameState().intProperty("balls").setValue(game.getAvailableBalls());
+        getGameState().intProperty("score").setValue(game.getCurrentScore());
+    }
+
+    @Override
+    protected void initGameVars(Map<String, Object> vars) {
+        vars.put("balls", 0);
+        vars.put("score", 0);
     }
 
     @Override
     protected void initUI() {
-        super.initUI();
+        Font font = new Font(30);
+        Text textBalls = new Text();
+        Text textScore = new Text();
+        textBalls.setFont(font);
+        textScore.setFont(font);
+        textBalls.setTranslateX(100);
+        textBalls.setTranslateY(500);
+        textScore.setTranslateX(500);
+        textScore.setTranslateY(500);
+
+        textBalls.textProperty().bind(getGameState().intProperty("balls").asString());
+        textScore.textProperty().bind(getGameState().intProperty("score").asString());
+
+        getGameScene().addUINode(textBalls);
+        getGameScene().addUINode(textScore);
+
+        updateUI();
     }
 
     private void setNewTable() {
