@@ -129,6 +129,7 @@ public class Pinball extends GameApplication {
                     @Override
                     protected void onHitBoxTrigger(Entity ball, Entity wall, HitBox boxBall, HitBox boxWall) {
                         if (boxWall.getName().equals("BOT")) {
+                            ball.removeComponent(PhysicsComponent.class);
                             ball.removeFromWorld();
                             game.dropBall();
                             updateUI();
