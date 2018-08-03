@@ -1,4 +1,4 @@
-package component;
+package component.hittablecomponent;
 
 import com.almasb.fxgl.time.TimerAction;
 import visitor.Visitor;

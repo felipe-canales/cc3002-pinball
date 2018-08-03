@@ -1,6 +1,6 @@
 package visitor;
 
-import component.HittableComponent;
+import component.hittablecomponent.HittableComponent;
 import logic.gameelements.bumper.KickerBumper;
 import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;

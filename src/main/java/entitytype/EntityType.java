@@ -1,8 +1,7 @@
 package entitytype;
 
 public enum EntityType {
-    LEFTFLIPPER,
-    RIGHTFLIPPER,
+    FLIPPER,
     BALL,
     WALL,
     BUMPER,

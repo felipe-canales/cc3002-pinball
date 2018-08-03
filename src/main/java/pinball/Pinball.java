@@ -8,10 +8,10 @@ import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.settings.GameSettings;
-import component.BumperComponent;
-import component.HittableComponent;
-import component.TargetComponent;
-import javafx.geometry.Point2D;
+import component.hittablecomponent.BumperComponent;
+import component.FlipperComponent;
+import component.hittablecomponent.HittableComponent;
+import component.hittablecomponent.TargetComponent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -65,21 +65,31 @@ public class Pinball extends GameApplication {
 
         input.addAction(new UserAction("Left flipper activated") {
             @Override
+            protected void onActionBegin() {
+                getGameWorld().getEntitiesByType(EntityType.FLIPPER)
+                        .forEach(e -> e.getComponent(FlipperComponent.class).startRotation());
+            }
+
+            @Override
             protected void onAction() {
-                getGameWorld().getEntitiesByType(EntityType.LEFTFLIPPER)
+                getGameWorld().getEntitiesByType(EntityType.FLIPPER)
                         .forEach(e -> {
-                            if (e.getRotation() > -40)
-                                e.rotateBy(-20);
+                            if (e.getRotation() < -50 || e.getRotation() > 50)
+                                e.getComponent(FlipperComponent.class).stopRotation();
                         });
             }
 
             @Override
             protected void onActionEnd() {
-                getGameWorld().getEntitiesByType(EntityType.LEFTFLIPPER)
-                        .forEach(e -> e.setRotation(20));
+                getGameWorld().getEntitiesByType(EntityType.FLIPPER)
+                        .forEach(e -> {
+                            FlipperComponent flipper = e.getComponent(FlipperComponent.class);
+                            flipper.stopRotation();
+                            flipper.resetRotation();
+                        });
             }
         }, KeyCode.A);
-        input.addAction(new UserAction("Right flipper activated") {
+        /*input.addAction(new UserAction("Right flipper activated") {
             @Override
             protected void onAction() {
                 getGameWorld().getEntitiesByType(EntityType.RIGHTFLIPPER)
@@ -94,7 +104,7 @@ public class Pinball extends GameApplication {
                 getGameWorld().getEntitiesByType(EntityType.RIGHTFLIPPER)
                         .forEach(e -> e.setRotation(-20));
             }
-        }, KeyCode.S);
+        }, KeyCode.S);*/
         input.addAction(new UserAction("New ball") {
             @Override
             protected void onActionBegin() {
@@ -137,7 +147,7 @@ public class Pinball extends GameApplication {
                     }
                 }
         );
-        getPhysicsWorld().addCollisionHandler(
+        /*getPhysicsWorld().addCollisionHandler(
                 new CollisionHandler(EntityType.BALL, EntityType.LEFTFLIPPER) {
                     @Override
                     protected void onCollision(Entity ball, Entity flipper) {
@@ -152,7 +162,7 @@ public class Pinball extends GameApplication {
                         ball.getComponent(PhysicsComponent.class).applyForceToCenter(new Point2D(-10, -200));
                     }
                 }
-        );
+        );*/
         getPhysicsWorld().addCollisionHandler(
                 new CollisionHandler(EntityType.BALL, EntityType.BUMPER) {
                     @Override

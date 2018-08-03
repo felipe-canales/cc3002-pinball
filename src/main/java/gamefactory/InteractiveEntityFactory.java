@@ -9,10 +9,12 @@ import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
 import com.almasb.fxgl.physics.box2d.dynamics.FixtureDef;
-import component.BumperComponent;
-import component.HittableComponent;
-import component.TargetComponent;
+import component.hittablecomponent.BumperComponent;
+import component.FlipperComponent;
+import component.hittablecomponent.HittableComponent;
+import component.hittablecomponent.TargetComponent;
 import entitytype.EntityType;
+import entitytype.FlipperType;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -23,26 +25,48 @@ import visitor.ShapePicker;
 
 public class InteractiveEntityFactory {
     public static Entity newLeftFlipper() {
+        return newFlipper(180, 450, new FlipperComponent(FlipperType.LEFTFLIPPER), 20);
+        /*PhysicsComponent physics = new PhysicsComponent();
+        physics.setBodyType(BodyType.KINEMATIC);
+
         Entity flipper =  Entities.builder()
                 .at(180, 450)
-                .type(EntityType.LEFTFLIPPER)
+                .type(EntityType.FLIPPER)
                 .viewFromNodeWithBBox(new Rectangle(100, 25, Color.BLACK))
-                .with(new CollidableComponent(true))
+                .with(new CollidableComponent(true), new FlipperComponent(FlipperType.LEFTFLIPPER))
                 .build();
 
         flipper.setRotation(20);
-        return flipper;
+        flipper.addComponent(physics);
+        return flipper;*/
     }
 
     public static Entity newRightFlipper() {
-        Entity flipper = Entities.builder()
+        return newFlipper(320, 450, new FlipperComponent(FlipperType.RIGHTFLIPPER), -20);
+        /*Entity flipper = Entities.builder()
                 .at(320, 450)
-                .type(EntityType.RIGHTFLIPPER)
+                .type(EntityType.FLIPPER)
                 .viewFromNodeWithBBox(new Rectangle(100, 25, Color.BLACK))
                 .with(new CollidableComponent(true))
                 .build();
 
         flipper.setRotation(-20);
+        return flipper;*/
+    }
+
+    private static Entity newFlipper(int x, int y, FlipperComponent fc, double angle) {
+        PhysicsComponent physics = new PhysicsComponent();
+        physics.setBodyType(BodyType.KINEMATIC);
+
+        Entity flipper =  Entities.builder()
+                .at(x, y)
+                .type(EntityType.FLIPPER)
+                .viewFromNodeWithBBox(new Rectangle(100, 25, Color.BLACK))
+                .with(new CollidableComponent(true), fc)
+                .build();
+
+        flipper.setRotation(angle);
+        flipper.addComponent(physics);
         return flipper;
     }
 

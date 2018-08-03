@@ -1,7 +1,8 @@
-package component;
+package component.hittablecomponent;
 
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.time.TimerAction;
+import component.hittablecomponent.HittableComponent;
 import javafx.util.Duration;
 import logic.gameelements.target.Target;
 import visitor.ShapePicker;

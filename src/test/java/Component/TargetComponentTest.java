@@ -2,7 +2,7 @@ package Component;
 
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.Target;
-import component.TargetComponent;
+import component.hittablecomponent.TargetComponent;
 import org.junit.*;
 
 import static org.junit.Assert.*;
