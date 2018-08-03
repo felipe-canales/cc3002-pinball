@@ -12,6 +12,7 @@ import component.hittablecomponent.BumperComponent;
 import component.FlipperComponent;
 import component.hittablecomponent.HittableComponent;
 import component.hittablecomponent.TargetComponent;
+import entitytype.FlipperType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -67,13 +68,21 @@ public class Pinball extends GameApplication {
             @Override
             protected void onActionBegin() {
                 getGameWorld().getEntitiesByType(EntityType.FLIPPER)
-                        .forEach(e -> e.getComponent(FlipperComponent.class).startRotation());
+                        .forEach(e -> {
+                            // If the flipper isn't a left flipper, do nothing
+                            if (e.getComponent(FlipperComponent.class).getType() != FlipperType.LEFTFLIPPER)
+                                return;
+                            e.getComponent(FlipperComponent.class).startRotation();
+                        });
             }
 
             @Override
             protected void onAction() {
                 getGameWorld().getEntitiesByType(EntityType.FLIPPER)
                         .forEach(e -> {
+                            // If the flipper isn't a left flipper, do nothing
+                            if (e.getComponent(FlipperComponent.class).getType() != FlipperType.LEFTFLIPPER)
+                                return;
                             if (e.getRotation() < -50 || e.getRotation() > 50)
                                 e.getComponent(FlipperComponent.class).stopRotation();
                         });
@@ -83,28 +92,52 @@ public class Pinball extends GameApplication {
             protected void onActionEnd() {
                 getGameWorld().getEntitiesByType(EntityType.FLIPPER)
                         .forEach(e -> {
+                            // If the flipper isn't a left flipper, do nothing
+                            if (e.getComponent(FlipperComponent.class).getType() != FlipperType.LEFTFLIPPER)
+                                return;
                             FlipperComponent flipper = e.getComponent(FlipperComponent.class);
                             flipper.stopRotation();
                             flipper.resetRotation(getMasterTimer());
                         });
             }
         }, KeyCode.A);
-        /*input.addAction(new UserAction("Right flipper activated") {
+        input.addAction(new UserAction("Right flipper activated") {
+            @Override
+            protected void onActionBegin() {
+                getGameWorld().getEntitiesByType(EntityType.FLIPPER)
+                        .forEach(e -> {
+                            // If the flipper isn't a right flipper, do nothing
+                            if (e.getComponent(FlipperComponent.class).getType() != FlipperType.RIGHTFLIPPER)
+                                return;
+                            e.getComponent(FlipperComponent.class).startRotation();
+                        });
+            }
+
             @Override
             protected void onAction() {
-                getGameWorld().getEntitiesByType(EntityType.RIGHTFLIPPER)
+                getGameWorld().getEntitiesByType(EntityType.FLIPPER)
                         .forEach(e -> {
-                            if (e.getRotation() < 40)
-                                e.rotateBy(20);
+                            // If the flipper isn't a right flipper, do nothing
+                            if (e.getComponent(FlipperComponent.class).getType() != FlipperType.RIGHTFLIPPER)
+                                return;
+                            if (e.getRotation() < -50 || e.getRotation() > 50)
+                                e.getComponent(FlipperComponent.class).stopRotation();
                         });
             }
 
             @Override
             protected void onActionEnd() {
-                getGameWorld().getEntitiesByType(EntityType.RIGHTFLIPPER)
-                        .forEach(e -> e.setRotation(-20));
+                getGameWorld().getEntitiesByType(EntityType.FLIPPER)
+                        .forEach(e -> {
+                            // If the flipper isn't a right flipper, do nothing
+                            if (e.getComponent(FlipperComponent.class).getType() != FlipperType.RIGHTFLIPPER)
+                                return;
+                            FlipperComponent flipper = e.getComponent(FlipperComponent.class);
+                            flipper.stopRotation();
+                            flipper.resetRotation(getMasterTimer());
+                        });
             }
-        }, KeyCode.S);*/
+        }, KeyCode.S);
         input.addAction(new UserAction("New ball") {
             @Override
             protected void onActionBegin() {

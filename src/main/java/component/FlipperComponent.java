@@ -36,4 +36,8 @@ public class FlipperComponent extends Component {
         p.setAngularVelocity(angleDif);
         timer.runOnceAfter(() -> stopRotation(), Duration.millis(1000/9));
     }
+
+    public FlipperType getType() {
+        return flipperType;
+    }
 }
