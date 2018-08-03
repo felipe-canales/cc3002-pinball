@@ -85,7 +85,7 @@ public class Pinball extends GameApplication {
                         .forEach(e -> {
                             FlipperComponent flipper = e.getComponent(FlipperComponent.class);
                             flipper.stopRotation();
-                            flipper.resetRotation();
+                            flipper.resetRotation(getMasterTimer());
                         });
             }
         }, KeyCode.A);
