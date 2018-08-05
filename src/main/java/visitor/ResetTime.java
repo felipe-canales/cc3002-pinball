@@ -5,10 +5,8 @@ import logic.gameelements.bumper.KickerBumper;
 import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;
-import logic.table.NullTable;
-import logic.table.PlayableTable;
 
-public class ResetTime implements Visitor {
+public class ResetTime implements HittableVisitor {
     private int time;
 
     public ResetTime(HittableComponent h) {
@@ -33,16 +31,6 @@ public class ResetTime implements Visitor {
     @Override
     public void visitDropTarget(DropTarget d) {
         time = 120;
-    }
-
-    @Override
-    public void visitNullTable(NullTable n) {
-
-    }
-
-    @Override
-    public void visitPlayableTable(PlayableTable p) {
-
     }
 
     public int getTime() {

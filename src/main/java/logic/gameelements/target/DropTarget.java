@@ -1,6 +1,6 @@
 package logic.gameelements.target;
 
-import visitor.Visitor;
+import visitor.HittableVisitor;
 
 import java.util.Random;
 
@@ -30,7 +30,7 @@ public class DropTarget extends AbstractTarget {
     }
 
     @Override
-    public void acceptVisitor(Visitor v) {
+    public void acceptVisitor(HittableVisitor v) {
         v.visitDropTarget(this);
     }
 

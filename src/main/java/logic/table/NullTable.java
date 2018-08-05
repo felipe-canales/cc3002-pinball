@@ -2,7 +2,7 @@ package logic.table;
 
 import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
-import visitor.Visitor;
+import visitor.hittableandtablevisitor.HittableAndTableVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ public class NullTable implements Table{
     }
 
     @Override
-    public void acceptVisitor(Visitor v) {
+    public void acceptVisitor(HittableAndTableVisitor v) {
         v.visitNullTable(this);
     }
 }

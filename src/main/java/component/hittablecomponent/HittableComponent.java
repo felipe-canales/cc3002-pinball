@@ -1,7 +1,7 @@
 package component.hittablecomponent;
 
 import com.almasb.fxgl.time.TimerAction;
-import visitor.Visitor;
+import visitor.HittableVisitor;
 
 public interface HittableComponent {
     void hit();
@@ -10,5 +10,5 @@ public interface HittableComponent {
     void changeView();
     void setTimerAction(TimerAction timerAction);
     void expireTimerAction();
-    void accept(Visitor v);
+    void accept(HittableVisitor v);
 }

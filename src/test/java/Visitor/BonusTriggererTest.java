@@ -4,7 +4,7 @@ import logic.gameelements.bumper.KickerBumper;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;
 import logic.table.NullTable;
-import visitor.BonusTriggerer;
+import visitor.hittableandtablevisitor.BonusTriggerer;
 import controller.Game;
 import logic.table.PlayableTable;
 import org.junit.*;

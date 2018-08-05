@@ -1,6 +1,6 @@
 package logic.gameelements;
 
-import visitor.Visitor;
+import visitor.HittableVisitor;
 
 import java.util.Observer;
 import java.util.Random;
@@ -35,7 +35,7 @@ public interface Hittable {
      *
      * @param v Instance of {@link Visitor}
      */
-    void acceptVisitor(Visitor v);
+    void acceptVisitor(HittableVisitor v);
 
     /**
      * Adds an {@link java.util.Observer} as a listener of this hittable.

@@ -5,10 +5,8 @@ import logic.gameelements.bumper.KickerBumper;
 import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;
-import logic.table.NullTable;
-import logic.table.PlayableTable;
 
-public class HittableSoundPlayer implements Visitor{
+public class HittableSoundPlayer implements HittableVisitor{
     private String soundName;
 
     public HittableSoundPlayer(HittableComponent hittable) {
@@ -45,16 +43,6 @@ public class HittableSoundPlayer implements Visitor{
             soundName = "target2active.wav";
         else
             soundName = "target2inactive.wav";
-    }
-
-    @Override
-    public void visitNullTable(NullTable n) {
-
-    }
-
-    @Override
-    public void visitPlayableTable(PlayableTable p) {
-
     }
 
     public String getSound() {

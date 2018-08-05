@@ -8,7 +8,7 @@ import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
 import logic.table.NullTable;
 import logic.table.Table;
-import visitor.BonusTriggerer;
+import visitor.hittableandtablevisitor.BonusTriggerer;
 
 import java.util.Observable;
 import java.util.Observer;

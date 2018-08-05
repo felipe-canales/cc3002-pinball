@@ -2,7 +2,7 @@ package logic.table;
 
 import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
-import visitor.Visitor;
+import visitor.hittableandtablevisitor.HittableAndTableVisitor;
 
 import java.util.List;
 
@@ -69,5 +69,5 @@ public interface Table {
      *
      * @param v Instance of {@link Visitor}
      */
-    void acceptVisitor(Visitor v);
+    void acceptVisitor(HittableAndTableVisitor v);
 }

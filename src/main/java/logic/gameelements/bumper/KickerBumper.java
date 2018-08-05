@@ -1,6 +1,6 @@
 package logic.gameelements.bumper;
 
-import visitor.Visitor;
+import visitor.HittableVisitor;
 
 import java.util.Random;
 
@@ -32,7 +32,7 @@ public class KickerBumper extends AbstractBumper {
     }
 
     @Override
-    public void acceptVisitor(Visitor v) {
+    public void acceptVisitor(HittableVisitor v) {
         v.visitKickerBumper(this);
     }
 }

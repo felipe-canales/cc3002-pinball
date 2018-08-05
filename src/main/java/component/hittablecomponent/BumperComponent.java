@@ -5,7 +5,7 @@ import com.almasb.fxgl.time.TimerAction;
 import javafx.util.Duration;
 import logic.gameelements.bumper.Bumper;
 import visitor.ShapePicker;
-import visitor.Visitor;
+import visitor.HittableVisitor;
 
 
 public class BumperComponent extends Component implements HittableComponent {
@@ -50,7 +50,7 @@ public class BumperComponent extends Component implements HittableComponent {
     }
 
     @Override
-    public void accept(Visitor v) {
+    public void accept(HittableVisitor v) {
         bumper.acceptVisitor(v);
     }
 }

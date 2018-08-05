@@ -6,7 +6,7 @@ import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;
 import logic.gameelements.target.Target;
-import visitor.Visitor;
+import visitor.hittableandtablevisitor.HittableAndTableVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,7 +116,7 @@ public class PlayableTable implements Table {
     }
 
     @Override
-    public void acceptVisitor(Visitor v) {
+    public void acceptVisitor(HittableAndTableVisitor v) {
         v.visitPlayableTable(this);
     }
 }

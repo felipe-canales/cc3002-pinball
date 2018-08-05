@@ -1,4 +1,4 @@
-package visitor;
+package visitor.hittableandtablevisitor;
 
 import controller.Game;
 import logic.gameelements.bumper.KickerBumper;
@@ -7,13 +7,14 @@ import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;
 import logic.table.NullTable;
 import logic.table.PlayableTable;
+import visitor.hittableandtablevisitor.HittableAndTableVisitor;
 
 /**
  * Visitor class that visits the hittables and triggers the aproppiate {@link Bonus}es.
  *
  * @author Felipe Canales
  */
-public class BonusTriggerer implements Visitor {
+public class BonusTriggerer implements HittableAndTableVisitor {
     private Game game;
 
     /**

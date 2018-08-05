@@ -9,10 +9,8 @@ import logic.gameelements.bumper.KickerBumper;
 import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;
-import logic.table.NullTable;
-import logic.table.PlayableTable;
 
-public class ShapePicker implements Visitor{
+public class ShapePicker implements HittableVisitor{
     private Shape shape;
 
     public ShapePicker(Hittable h) {
@@ -49,16 +47,6 @@ public class ShapePicker implements Visitor{
             shape = new Rectangle(25, 25, Color.DARKOLIVEGREEN);
         else
             shape = new Rectangle(25, 25, Color.DARKGRAY);
-    }
-
-    @Override
-    public void visitNullTable(NullTable n) {
-
-    }
-
-    @Override
-    public void visitPlayableTable(PlayableTable p) {
-
     }
 
     public Shape getShape() {

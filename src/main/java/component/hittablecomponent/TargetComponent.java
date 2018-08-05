@@ -6,7 +6,7 @@ import component.hittablecomponent.HittableComponent;
 import javafx.util.Duration;
 import logic.gameelements.target.Target;
 import visitor.ShapePicker;
-import visitor.Visitor;
+import visitor.HittableVisitor;
 
 public class TargetComponent extends Component implements HittableComponent {
     private Target target;
@@ -50,7 +50,7 @@ public class TargetComponent extends Component implements HittableComponent {
     }
 
     @Override
-    public void accept(Visitor v) {
+    public void accept(HittableVisitor v) {
         target.acceptVisitor(v);
     }
 }
