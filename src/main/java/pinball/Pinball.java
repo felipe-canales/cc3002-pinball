@@ -77,18 +77,6 @@ public class Pinball extends GameApplication {
             }
 
             @Override
-            protected void onAction() {
-                getGameWorld().getEntitiesByType(EntityType.FLIPPER)
-                        .forEach(e -> {
-                            // If the flipper isn't a left flipper, do nothing
-                            if (e.getComponent(FlipperComponent.class).getType() != FlipperType.LEFTFLIPPER)
-                                return;
-                            if (e.getRotation() < -50 || e.getRotation() > 50)
-                                e.getComponent(FlipperComponent.class).stopRotation();
-                        });
-            }
-
-            @Override
             protected void onActionEnd() {
                 getGameWorld().getEntitiesByType(EntityType.FLIPPER)
                         .forEach(e -> {
@@ -96,8 +84,7 @@ public class Pinball extends GameApplication {
                             if (e.getComponent(FlipperComponent.class).getType() != FlipperType.LEFTFLIPPER)
                                 return;
                             FlipperComponent flipper = e.getComponent(FlipperComponent.class);
-                            flipper.stopRotation();
-                            flipper.resetRotation(getMasterTimer());
+                            flipper.resetRotation();
                         });
             }
         }, KeyCode.A);
@@ -114,18 +101,6 @@ public class Pinball extends GameApplication {
             }
 
             @Override
-            protected void onAction() {
-                getGameWorld().getEntitiesByType(EntityType.FLIPPER)
-                        .forEach(e -> {
-                            // If the flipper isn't a right flipper, do nothing
-                            if (e.getComponent(FlipperComponent.class).getType() != FlipperType.RIGHTFLIPPER)
-                                return;
-                            if (e.getRotation() < -50 || e.getRotation() > 50)
-                                e.getComponent(FlipperComponent.class).stopRotation();
-                        });
-            }
-
-            @Override
             protected void onActionEnd() {
                 getGameWorld().getEntitiesByType(EntityType.FLIPPER)
                         .forEach(e -> {
@@ -133,8 +108,7 @@ public class Pinball extends GameApplication {
                             if (e.getComponent(FlipperComponent.class).getType() != FlipperType.RIGHTFLIPPER)
                                 return;
                             FlipperComponent flipper = e.getComponent(FlipperComponent.class);
-                            flipper.stopRotation();
-                            flipper.resetRotation(getMasterTimer());
+                            flipper.resetRotation();
                         });
             }
         }, KeyCode.S);
@@ -180,22 +154,6 @@ public class Pinball extends GameApplication {
                     }
                 }
         );
-        /*getPhysicsWorld().addCollisionHandler(
-                new CollisionHandler(EntityType.BALL, EntityType.LEFTFLIPPER) {
-                    @Override
-                    protected void onCollision(Entity ball, Entity flipper) {
-                        ball.getComponent(PhysicsComponent.class).applyForceToCenter(new Point2D(10, -200));
-                    }
-                }
-        );
-        getPhysicsWorld().addCollisionHandler(
-                new CollisionHandler(EntityType.BALL, EntityType.RIGHTFLIPPER) {
-                    @Override
-                    protected void onCollision(Entity ball, Entity flipper) {
-                        ball.getComponent(PhysicsComponent.class).applyForceToCenter(new Point2D(-10, -200));
-                    }
-                }
-        );*/
         getPhysicsWorld().addCollisionHandler(
                 new CollisionHandler(EntityType.BALL, EntityType.BUMPER) {
                     @Override
