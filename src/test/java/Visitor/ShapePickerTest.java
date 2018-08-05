@@ -14,12 +14,6 @@ import static org.junit.Assert.*;
 import visitor.ShapePicker;
 
 public class ShapePickerTest {
-    private ShapePicker picker;
-
-    @Before
-    public void setUp() {
-
-    }
 
     @Test
     public void visitNormalKickerBumper() {

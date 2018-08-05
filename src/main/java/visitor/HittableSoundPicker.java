@@ -6,10 +6,10 @@ import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;
 
-public class HittableSoundPlayer implements HittableVisitor{
+public class HittableSoundPicker implements HittableVisitor{
     private String soundName;
 
-    public HittableSoundPlayer(HittableComponent hittable) {
+    public HittableSoundPicker(HittableComponent hittable) {
         hittable.accept(this);
     }
 

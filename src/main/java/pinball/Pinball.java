@@ -23,7 +23,7 @@ import facade.HomeworkTwoFacade;
 import logic.table.Table;
 import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
-import visitor.HittableSoundPlayer;
+import visitor.HittableSoundPicker;
 import visitor.ResetTime;
 
 import java.util.Map;
@@ -162,7 +162,7 @@ public class Pinball extends GameApplication {
                         boolean state = bumperState.isAlternateState();
 
                         bumperState.hit();
-                        getAudioPlayer().playSound(new HittableSoundPlayer(bumperState).getSound());
+                        getAudioPlayer().playSound(new HittableSoundPicker(bumperState).getSound());
 
                         if (state != bumperState.isAlternateState()) {
                             bumperState.changeView();
@@ -179,7 +179,7 @@ public class Pinball extends GameApplication {
                         TargetComponent targetState = target.getComponent(TargetComponent.class);
                         int timesTriggered = game.getDropTargetBonus().timesTriggered();
 
-                        getAudioPlayer().playSound(new HittableSoundPlayer(targetState).getSound());
+                        getAudioPlayer().playSound(new HittableSoundPicker(targetState).getSound());
                         targetState.hit();
                         targetState.changeView();
 
@@ -233,7 +233,6 @@ public class Pinball extends GameApplication {
         for (Target t : table.getTargets())
             getGameWorld().addEntity(newTarget(rng.nextInt(550), rng.nextInt(400), t));
         game.setGameTable(table);
-        getGameWorld().addEntity(newBall());
     }
 
     private void updateAllElements() {
