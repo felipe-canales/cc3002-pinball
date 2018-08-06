@@ -10,9 +10,11 @@ import logic.table.PlayableTable;
 import visitor.hittableandtablevisitor.HittableAndTableVisitor;
 
 /**
- * Visitor class that visits the hittables and triggers the aproppiate {@link Bonus}es.
+ * Visitor class that visits hittables a tables and triggers the aproppiate {@link Bonus}es if appropiate.
  *
  * @author Felipe Canales
+ * @see logic.gameelements.Hittable
+ * @see logic.table.Table
  */
 public class BonusTriggerer implements HittableAndTableVisitor {
     private Game game;
@@ -26,35 +28,23 @@ public class BonusTriggerer implements HittableAndTableVisitor {
         this.game = game;
     }
 
-    /**
-     * Triggers {@link logic.bonus.ExtraBallBonus} in the given game.
-     */
     @Override
     public void visitKickerBumper(KickerBumper k) {
         if (k.shouldTriggerbonus())
             triggerExtraBallBonus();
     }
 
-    /**
-     * Triggers {@link logic.bonus.ExtraBallBonus} in the given game.
-     */
     @Override
     public void visitPopBumper(PopBumper p) {
         if (p.shouldTriggerbonus())
             triggerExtraBallBonus();
     }
 
-    /**
-     * Triggers {@link logic.bonus.JackPotBonus} in the given game.
-     */
     @Override
     public void visitSpotTarget(SpotTarget s) {
         triggerJackPotBonus();
     }
 
-    /**
-     * Visits the game table, and if appropiate, calls to triggerDropTargetBonus.
-     */
     @Override
     public void visitDropTarget(DropTarget d) {
         if (d.getRNG().nextDouble() < 0.3)
@@ -73,9 +63,6 @@ public class BonusTriggerer implements HittableAndTableVisitor {
             triggerDropTargetBonus();
     }
 
-    /**
-     * Triggers {@link logic.bonus.DropTargetBonus} in the given game.
-     */
     private void triggerDropTargetBonus() {
         game.getDropTargetBonus().trigger(game);
         game.getTable().resetDropTargets();

@@ -32,6 +32,11 @@ import java.util.Random;
 import static gamefactory.StaticElementFactory.*;
 import static gamefactory.InteractiveEntityFactory.*;
 
+/**
+ * Main class. Running this class will start the game.
+ *
+ * @author Felipe Canales
+ */
 public class Pinball extends GameApplication {
     private HomeworkTwoFacade game;
 
@@ -212,7 +217,7 @@ public class Pinball extends GameApplication {
         textScore.setFont(font);
         textBalls.setTranslateX(100);
         textBalls.setTranslateY(550);
-        textScore.setTranslateX(500);
+        textScore.setTranslateX(450);
         textScore.setTranslateY(550);
 
         textBalls.textProperty().bind(getGameState().intProperty("balls").asString());
@@ -258,6 +263,11 @@ public class Pinball extends GameApplication {
                         Duration.seconds(new ResetTime(hittable).getTime())));
     }
 
+    /**
+     * Main method.
+     *
+     * @param args Execution arguments.
+     */
     public static void main(String[] args) {
         launch(args);
     }

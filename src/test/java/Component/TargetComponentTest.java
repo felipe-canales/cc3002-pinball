@@ -1,9 +1,17 @@
 package Component;
 
+import com.almasb.fxgl.entity.Entities;
+import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.entity.component.Component;
+import com.almasb.fxgl.entity.components.CollidableComponent;
+import com.almasb.fxgl.physics.PhysicsComponent;
+import entitytype.EntityType;
+import gamefactory.InteractiveEntityFactory;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.Target;
 import component.hittablecomponent.TargetComponent;
 import org.junit.*;
+import visitor.ShapePicker;
 
 import static org.junit.Assert.*;
 
@@ -34,11 +42,18 @@ public class TargetComponentTest {
         assertFalse(tc.isAlternateState());
     }
 
-    /*@Test
+    @Test
     public void resetState() {
-        Entity e = Entities.builder().viewFromNodeWithBBox(new ShapePicker(t).getShape()).with(tc).build();
+        Entity e = Entities.builder()
+                .with(new PhysicsComponent(), new TargetComponent(t))
+                .build();
         t.hit();
-        tc.resetState();
+        e.getComponent(TargetComponent.class).resetState();
         assertTrue(t.isActive());
-    }*/
+    }
+
+    @Test
+    public void changeView() {
+        Entity e = InteractiveEntityFactory.newTarget(0, 0, t);
+    }
 }

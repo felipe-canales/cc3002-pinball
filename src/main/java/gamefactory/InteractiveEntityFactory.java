@@ -23,11 +23,27 @@ import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
 import visitor.ShapePicker;
 
+/**
+ * Class with the purpose of creating balls, and Entities that interact with the ball.
+ *
+ * @author Felipe Canales
+ */
 public class InteractiveEntityFactory {
+
+    /**
+     * Creates a new left flipper.
+     *
+     * @return an Entity representing a left flipper.
+     */
     public static Entity newLeftFlipper() {
         return newFlipper(180, 450, new FlipperComponent(FlipperType.LEFTFLIPPER), 20);
     }
 
+    /**
+     * Creates a new right flipper.
+     *
+     * @return an Entity representing a right flipper.
+     */
     public static Entity newRightFlipper() {
         return newFlipper(320, 450, new FlipperComponent(FlipperType.RIGHTFLIPPER), -20);
     }
@@ -35,19 +51,21 @@ public class InteractiveEntityFactory {
     private static Entity newFlipper(int x, int y, FlipperComponent fc, double angle) {
         PhysicsComponent physics = new PhysicsComponent();
         physics.setBodyType(BodyType.KINEMATIC);
+        physics.setOnPhysicsInitialized(fc::resetRotation);
 
-        Entity flipper =  Entities.builder()
+        return Entities.builder()
                 .at(x, y)
                 .type(EntityType.FLIPPER)
                 .viewFromNodeWithBBox(new Rectangle(100, 25, Color.BLACK))
-                .with(new CollidableComponent(true), fc)
+                .with(fc, physics)
                 .build();
-
-        flipper.setRotation(angle);
-        flipper.addComponent(physics);
-        return flipper;
     }
 
+    /**
+     * Creates a new ball.
+     *
+     * @return an Entity that behaves like a ball.
+     */
     public static Entity newBall() {
         PhysicsComponent physics = new PhysicsComponent();
         physics.setBodyType(BodyType.DYNAMIC);
@@ -63,10 +81,26 @@ public class InteractiveEntityFactory {
                 .build();
     }
 
+    /**
+     * Creates a Bumper Entity.
+     *
+     * @param x horizontal position.
+     * @param y vertical position.
+     * @param b Instance of Bumper.
+     * @return an Entity representing a Bumper.
+     */
     public static Entity newBumper(int x, int y, Bumper b) {
         return newHittable(x, y, b, new BumperComponent(b), EntityType.BUMPER);
     }
 
+    /**
+     * Creates a Target Entity.
+     *
+     * @param x horizontal position.
+     * @param y vertical position.
+     * @param t Instance of Target.
+     * @return an Entity representing a Bumper.
+     */
     public static Entity newTarget(int x, int y, Target t) {
         return newHittable(x, y, t, new TargetComponent(t), EntityType.TARGET);
     }

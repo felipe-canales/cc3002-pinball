@@ -7,11 +7,21 @@ import logic.gameelements.bumper.Bumper;
 import visitor.ShapePicker;
 import visitor.HittableVisitor;
 
-
+/**
+ * Component that allows interactions between an {@link com.almasb.fxgl.entity.Entity} and a {@link Bumper}.
+ *
+ * @author Felipe Canales
+ * @see TargetComponent
+ */
 public class BumperComponent extends Component implements HittableComponent {
     private Bumper bumper;
     private TimerAction action;
 
+    /**
+     * Constructor
+     *
+     * @param b Instance of Bumper.
+     */
     public BumperComponent(Bumper b) {
         bumper = b;
         action = new TimerAction(Duration.UNKNOWN, () -> {}, 0);
@@ -22,6 +32,11 @@ public class BumperComponent extends Component implements HittableComponent {
         bumper.hit();
     }
 
+    /**
+     * Returns true if the Bumper is upgraded, else returns false.
+     *
+     * @return if the Bumper is upgraded.
+     */
     @Override
     public boolean isAlternateState() {
         return bumper.isUpgraded();

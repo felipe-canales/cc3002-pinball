@@ -9,7 +9,7 @@ import java.util.Random;
 
 import static org.junit.Assert.*;
 
-public class IntegrationTest {
+public class IntegrationTest  {
     private PlayableTable table;
     private Game game;
 

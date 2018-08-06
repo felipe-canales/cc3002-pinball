@@ -6,9 +6,20 @@ import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;
 
+/**
+ * Visitor class that selects the appropiate sound file name of a {@link logic.gameelements.Hittable} contained
+ * within a {@link HittableComponent}.
+ *
+ * @author Felipe Canales
+ */
 public class HittableSoundPicker implements HittableVisitor{
     private String soundName;
 
+    /**
+     * Constructor
+     *
+     * @param hittable Component that contains a Hittable.
+     */
     public HittableSoundPicker(HittableComponent hittable) {
         hittable.accept(this);
     }
@@ -45,6 +56,11 @@ public class HittableSoundPicker implements HittableVisitor{
             soundName = "target2inactive.wav";
     }
 
+    /**
+     * Filename getter.
+     *
+     * @return the name of the sound file associated to a hittable.
+     */
     public String getSound() {
         return soundName;
     }

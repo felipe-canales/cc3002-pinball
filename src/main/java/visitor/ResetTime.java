@@ -6,9 +6,20 @@ import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;
 
+/**
+ * Visitor class that given a {@link logic.gameelements.Hittable} contained in a {@link HittableComponent}, selects the
+ * time that said Hittable should reset its state.
+ *
+ * @author Felipe Canales
+ */
 public class ResetTime implements HittableVisitor {
     private int time;
 
+    /**
+     * Constructor
+     *
+     * @param h Component that contains a Hittable.
+     */
     public ResetTime(HittableComponent h) {
         h.accept(this);
     }
@@ -33,6 +44,11 @@ public class ResetTime implements HittableVisitor {
         time = 120;
     }
 
+    /**
+     * Reset time getter
+     *
+     * @return time to reset a hittable.
+     */
     public int getTime() {
         return time;
     }

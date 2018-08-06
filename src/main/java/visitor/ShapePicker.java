@@ -10,9 +10,19 @@ import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;
 
+/**
+ * Visitor class that given a {@link Hittable}, selects a {@link Shape} to be shown on screen.
+ *
+ * @author Felipe Canales
+ */
 public class ShapePicker implements HittableVisitor{
     private Shape shape;
 
+    /**
+     * Constructor
+     *
+     * @param h Hittable element
+     */
     public ShapePicker(Hittable h) {
         h.acceptVisitor(this);
     }
@@ -49,6 +59,11 @@ public class ShapePicker implements HittableVisitor{
             shape = new Rectangle(25, 25, Color.DARKGRAY);
     }
 
+    /**
+     * Shape getter.
+     *
+     * @return Shape that will represent a hittable.
+     */
     public Shape getShape() {
         return shape;
     }
