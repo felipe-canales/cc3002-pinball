@@ -1,7 +1,7 @@
 package Visitor;
 
-import component.hittablecomponent.BumperComponent;
-import component.hittablecomponent.TargetComponent;
+import gui.component.hittablecomponent.BumperComponent;
+import gui.component.hittablecomponent.TargetComponent;
 import logic.gameelements.bumper.KickerBumper;
 import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;

@@ -1,4 +1,4 @@
-package entitytype;
+package gui.entitytype;
 
 public enum FlipperType {
     LEFTFLIPPER,

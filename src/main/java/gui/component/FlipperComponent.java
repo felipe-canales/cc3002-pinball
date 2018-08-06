@@ -1,9 +1,9 @@
-package component;
+package gui.component;
 
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.PhysicsComponent;
-import entitytype.FlipperType;
+import gui.entitytype.FlipperType;
 
 /**
  * Component class that models the behaviour of a flipper.

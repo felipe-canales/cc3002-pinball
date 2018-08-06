@@ -1,11 +1,11 @@
-package gamefactory;
+package gui.gamefactory;
 
 import com.almasb.fxgl.entity.Entities;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.RenderLayer;
 import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.physics.PhysicsComponent;
-import entitytype.EntityType;
+import gui.entitytype.EntityType;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 

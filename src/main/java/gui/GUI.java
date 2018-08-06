@@ -1,4 +1,4 @@
-package pinball;
+package gui;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.entity.Entity;
@@ -8,17 +8,17 @@ import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.settings.GameSettings;
-import component.hittablecomponent.BumperComponent;
-import component.FlipperComponent;
-import component.hittablecomponent.HittableComponent;
-import component.hittablecomponent.TargetComponent;
-import entitytype.FlipperType;
+import gui.component.hittablecomponent.BumperComponent;
+import gui.component.FlipperComponent;
+import gui.component.hittablecomponent.HittableComponent;
+import gui.component.hittablecomponent.TargetComponent;
+import gui.entitytype.FlipperType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-import entitytype.EntityType;
+import gui.entitytype.EntityType;
 import facade.HomeworkTwoFacade;
 import logic.table.Table;
 import logic.gameelements.bumper.Bumper;
@@ -29,15 +29,15 @@ import visitor.ResetTime;
 import java.util.Map;
 import java.util.Random;
 
-import static gamefactory.StaticElementFactory.*;
-import static gamefactory.InteractiveEntityFactory.*;
+import static gui.gamefactory.StaticElementFactory.*;
+import static gui.gamefactory.InteractiveEntityFactory.*;
 
 /**
  * Main class. Running this class will start the game.
  *
  * @author Felipe Canales
  */
-public class Pinball extends GameApplication {
+public class GUI extends GameApplication {
     private HomeworkTwoFacade game;
 
     @Override

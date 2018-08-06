@@ -1,4 +1,4 @@
-package gamefactory;
+package gui.gamefactory;
 
 import com.almasb.fxgl.entity.Entities;
 import com.almasb.fxgl.entity.Entity;
@@ -9,12 +9,12 @@ import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
 import com.almasb.fxgl.physics.box2d.dynamics.FixtureDef;
-import component.hittablecomponent.BumperComponent;
-import component.FlipperComponent;
-import component.hittablecomponent.HittableComponent;
-import component.hittablecomponent.TargetComponent;
-import entitytype.EntityType;
-import entitytype.FlipperType;
+import gui.component.hittablecomponent.BumperComponent;
+import gui.component.FlipperComponent;
+import gui.component.hittablecomponent.HittableComponent;
+import gui.component.hittablecomponent.TargetComponent;
+import gui.entitytype.EntityType;
+import gui.entitytype.FlipperType;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
