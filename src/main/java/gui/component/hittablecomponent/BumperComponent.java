@@ -3,9 +3,9 @@ package gui.component.hittablecomponent;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.time.TimerAction;
 import javafx.util.Duration;
+import logic.gameelements.Hittable;
 import logic.gameelements.bumper.Bumper;
 import visitor.ShapePicker;
-import visitor.HittableVisitor;
 
 /**
  * Component that allows interactions between an {@link com.almasb.fxgl.entity.Entity} and a {@link Bumper}.
@@ -65,7 +65,7 @@ public class BumperComponent extends Component implements HittableComponent {
     }
 
     @Override
-    public void accept(HittableVisitor v) {
-        bumper.acceptVisitor(v);
+    public Hittable getHittable() {
+        return bumper;
     }
 }

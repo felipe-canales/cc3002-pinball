@@ -1,14 +1,14 @@
 package visitor;
 
-import gui.component.hittablecomponent.HittableComponent;
+import logic.gameelements.Hittable;
 import logic.gameelements.bumper.KickerBumper;
 import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;
 
 /**
- * Visitor class that given a {@link logic.gameelements.Hittable} contained in a {@link HittableComponent}, selects the
- * time that said Hittable should reset its state.
+ * Visitor class that given a {@link logic.gameelements.Hittable}, selects the time that said Hittable should
+ * reset its state.
  *
  * @author Felipe Canales
  */
@@ -18,10 +18,10 @@ public class ResetTime implements HittableVisitor {
     /**
      * Constructor
      *
-     * @param h Component that contains a Hittable.
+     * @param hittable Instance of Hittable.
      */
-    public ResetTime(HittableComponent h) {
-        h.accept(this);
+    public ResetTime(Hittable hittable) {
+        hittable.acceptVisitor(this);
     }
 
     @Override

@@ -167,7 +167,7 @@ public class GUI extends GameApplication {
                         boolean state = bumperState.isAlternateState();
 
                         bumperState.hit();
-                        getAudioPlayer().playSound(new HittableSoundPicker(bumperState).getSound());
+                        getAudioPlayer().playSound(new HittableSoundPicker(bumperState.getHittable()).getSound());
 
                         if (state != bumperState.isAlternateState()) {
                             bumperState.changeView();
@@ -184,7 +184,7 @@ public class GUI extends GameApplication {
                         TargetComponent targetState = target.getComponent(TargetComponent.class);
                         int timesTriggered = game.getDropTargetBonus().timesTriggered();
 
-                        getAudioPlayer().playSound(new HittableSoundPicker(targetState).getSound());
+                        getAudioPlayer().playSound(new HittableSoundPicker(targetState.getHittable()).getSound());
                         targetState.hit();
                         targetState.changeView();
 
@@ -260,7 +260,7 @@ public class GUI extends GameApplication {
     private void resetTimer(HittableComponent hittable) {
         hittable.setTimerAction(
                 getMasterTimer().runOnceAfter(() -> hittable.resetState(),
-                        Duration.seconds(new ResetTime(hittable).getTime())));
+                        Duration.seconds(new ResetTime(hittable.getHittable()).getTime())));
     }
 
     /**

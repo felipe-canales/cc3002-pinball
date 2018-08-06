@@ -1,7 +1,5 @@
 package Visitor;
 
-import gui.component.hittablecomponent.BumperComponent;
-import gui.component.hittablecomponent.TargetComponent;
 import logic.gameelements.bumper.KickerBumper;
 import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
@@ -14,25 +12,25 @@ public class ResetTimeTest {
 
     @Test
     public void visitKickerBumper() {
-        BumperComponent bc = new BumperComponent(new KickerBumper());
-        assertEquals(10, new ResetTime(bc).getTime());
+        KickerBumper k = new KickerBumper();
+        assertEquals(10, new ResetTime(k).getTime());
     }
 
     @Test
     public void visitPopBumper() {
-        BumperComponent bc = new BumperComponent(new PopBumper());
-        assertEquals(10, new ResetTime(bc).getTime());
+        PopBumper p = new PopBumper();
+        assertEquals(10, new ResetTime(p).getTime());
     }
 
     @Test
     public void visitDropTarget() {
-        TargetComponent tc = new TargetComponent(new DropTarget());
-        assertEquals(120, new ResetTime(tc).getTime());
+        DropTarget d = new DropTarget();
+        assertEquals(120, new ResetTime(d).getTime());
     }
 
     @Test
     public void visitSpotTarget() {
-        TargetComponent tc = new TargetComponent(new SpotTarget());
-        assertEquals(20, new ResetTime(tc).getTime());
+        SpotTarget s = new SpotTarget();
+        assertEquals(20, new ResetTime(s).getTime());
     }
 }

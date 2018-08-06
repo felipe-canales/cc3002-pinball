@@ -1,14 +1,13 @@
 package visitor;
 
-import gui.component.hittablecomponent.HittableComponent;
+import logic.gameelements.Hittable;
 import logic.gameelements.bumper.KickerBumper;
 import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
 import logic.gameelements.target.SpotTarget;
 
 /**
- * Visitor class that selects the appropiate sound file name of a {@link logic.gameelements.Hittable} contained
- * within a {@link HittableComponent}.
+ * Visitor class that selects the appropiate sound file name of a {@link logic.gameelements.Hittable}.
  *
  * @author Felipe Canales
  */
@@ -18,10 +17,10 @@ public class HittableSoundPicker implements HittableVisitor{
     /**
      * Constructor
      *
-     * @param hittable Component that contains a Hittable.
+     * @param hittable Instance of Hittable.
      */
-    public HittableSoundPicker(HittableComponent hittable) {
-        hittable.accept(this);
+    public HittableSoundPicker(Hittable hittable) {
+        hittable.acceptVisitor(this);
     }
 
     @Override

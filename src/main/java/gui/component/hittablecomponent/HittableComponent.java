@@ -1,7 +1,7 @@
 package gui.component.hittablecomponent;
 
 import com.almasb.fxgl.time.TimerAction;
-import visitor.HittableVisitor;
+import logic.gameelements.Hittable;
 
 /**
  * Interface of a {@link com.almasb.fxgl.entity.component.Component} that connects an
@@ -52,9 +52,9 @@ public interface HittableComponent {
     void expireTimerAction();
 
     /**
-     * Accepts a HittableVisitor.
+     * Hittable getter.
      *
-     * @param v HittableVisitor.
+     * @return the Hittable contained.
      */
-    void accept(HittableVisitor v);
+    Hittable getHittable();
 }

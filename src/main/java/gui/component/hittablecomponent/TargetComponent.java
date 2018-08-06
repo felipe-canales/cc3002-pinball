@@ -3,9 +3,9 @@ package gui.component.hittablecomponent;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.time.TimerAction;
 import javafx.util.Duration;
+import logic.gameelements.Hittable;
 import logic.gameelements.target.Target;
 import visitor.ShapePicker;
-import visitor.HittableVisitor;
 
 /**
  * Component that allows interacions between an {@link com.almasb.fxgl.entity.Entity} and a {@link Target}.
@@ -62,7 +62,8 @@ public class TargetComponent extends Component implements HittableComponent {
     }
 
     @Override
-    public void accept(HittableVisitor v) {
-        target.acceptVisitor(v);
+    public Hittable getHittable() {
+        return target;
     }
+
 }

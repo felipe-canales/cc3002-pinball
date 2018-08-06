@@ -1,7 +1,5 @@
 package Visitor;
 
-import gui.component.hittablecomponent.BumperComponent;
-import gui.component.hittablecomponent.TargetComponent;
 import logic.gameelements.bumper.KickerBumper;
 import logic.gameelements.bumper.PopBumper;
 import logic.gameelements.target.DropTarget;
@@ -15,55 +13,53 @@ public class HittableSoundPickerTest {
 
     @Test
     public void visitNormalKickerBumper() {
-        BumperComponent bc = new BumperComponent(new KickerBumper());
-        assertEquals("bumper1.wav", new HittableSoundPicker(bc).getSound());
+        KickerBumper k = new KickerBumper();
+        assertEquals("bumper1.wav", new HittableSoundPicker(k).getSound());
     }
 
     @Test
     public void visitUpgradedKickerBumper() {
         KickerBumper k = new KickerBumper();
         k.upgrade();
-        BumperComponent bc = new BumperComponent(k);
-        assertEquals("bumper1up.wav", new HittableSoundPicker(bc).getSound());
+        assertEquals("bumper1up.wav", new HittableSoundPicker(k).getSound());
     }
 
     @Test
     public void visitNormalPopBumper() {
-        BumperComponent bc = new BumperComponent(new PopBumper());
-        assertEquals("bumper2.wav", new HittableSoundPicker(bc).getSound());
+        PopBumper p = new PopBumper();
+        assertEquals("bumper2.wav", new HittableSoundPicker(p).getSound());
     }
 
     @Test
     public void visitUpgradedPopBumper() {
         PopBumper p = new PopBumper();
         p.upgrade();
-        BumperComponent bc = new BumperComponent(p);
-        assertEquals("bumper2up.wav", new HittableSoundPicker(bc).getSound());
+        assertEquals("bumper2up.wav", new HittableSoundPicker(p).getSound());
     }
 
     @Test
     public void visitNormalSpotTarget() {
-        TargetComponent tc = new TargetComponent(new SpotTarget());
-        assertEquals("target1active.wav", new HittableSoundPicker(tc).getSound());
+        SpotTarget s = new SpotTarget();
+        assertEquals("target1active.wav", new HittableSoundPicker(s).getSound());
     }
 
     @Test
     public void visitDisabledSpotTarget() {
-        TargetComponent tc = new TargetComponent(new SpotTarget());
-        tc.hit();
-        assertEquals("target1inactive.wav", new HittableSoundPicker(tc).getSound());
+        SpotTarget s = new SpotTarget();
+        s.hit();
+        assertEquals("target1inactive.wav", new HittableSoundPicker(s).getSound());
     }
 
     @Test
     public void visitNormalDropTarget() {
-        TargetComponent tc = new TargetComponent(new DropTarget());
-        assertEquals("target2active.wav", new HittableSoundPicker(tc).getSound());
+        DropTarget d = new DropTarget();
+        assertEquals("target2active.wav", new HittableSoundPicker(d).getSound());
     }
 
     @Test
     public void visitDisabledDropTarget() {
-        TargetComponent tc = new TargetComponent(new DropTarget());
-        tc.hit();
-        assertEquals("target2inactive.wav", new HittableSoundPicker(tc).getSound());
+        DropTarget d = new DropTarget();
+        d.hit();
+        assertEquals("target2inactive.wav", new HittableSoundPicker(d).getSound());
     }
 }
